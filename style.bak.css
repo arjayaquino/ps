@@ -1,0 +1,491 @@
+/*
+Theme Name: PS Retailer
+Description: This is a theme for Phil+Sebastian Roasters which is a child theme for The Retailer.
+Author: M. Pringle, J. Herman, and A. Aquino
+Author URI: http: //www.getbowtied.com/
+Template: theretailer
+Version: 1.8.1
+*/
+
+@import url("../theretailer/style.css");
+
+/****************************************************************/
+/*************** ADD YOUR CUSTOM CSS IN THIS AREA ***************/
+/****************************************************************/
+
+a:hover,
+#submit:hover,
+.button:hover {
+	transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-ms-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	-webkit-transition: all 0.2s ease-out;
+}
+
+
+
+
+
+/***************************************************************/
+/************************** Main font **************************/
+/***************************************************************/
+
+body,.ctextfield,.cselect,.ctextarea,.ccheckbox_group label,.cradio_group label,.gbtr_light_footer_no_widgets,.gbtr_widget_footer_from_the_blog .gbtr_widget_item_title,.widget input[type=text],.widget input[type=password],.widget select,.gbtr_tools_search_inputtext,.gbtr_second_menu,.gbtr_little_shopping_bag .overview,.gbtr_featured_section_title,h1.entry-title,h1.page-title,h1.entry-title a,h1.page-title a,em.items_found,em.items_found_cart,.product_item p,div.product .product_title,#content div.product .product_title,.gbtr_product_description,div.product form.cart .variations .value select,#content div.product form.cart .variations .value select,div.product div.product_meta,#content div.product div.product_meta,div.product .woocommerce_tabs .panel,#content div.product .woocommerce_tabs .panel,#content div.product div.product_meta,div.product .woocommerce-tabs .panel,#content div.product .woocommerce-tabs .panel,.coupon .input-text,.cart_totals .shipping td,.shipping_calculator h3,.checkout h3,.gbtr_checkout_method_header,.checkout .input-text,.checkout #shiptobilling label,table.shop_table tfoot .shipping td,.gbtr_checkout_login .input-text,table.my_account orders .order-number a,.myaccount_user,.order-info,.myaccount_user span,.order-info span,.gbtr_my_account_wrapper input,.gbtr_my_account_wrapper select,.gbtr_login_register_wrapper h2,.gbtr_login_register_wrapper input,.sf-menu li li a,div.product form.cart .variations .reset_variations,#content div.product form.cart .variations .reset_variations,.shortcode_banner_simple_inside h3,.shortcode_banner_simple_inside h3 strong,.woocommerce_message a.button,.woocommerce-message a.button,.mc_var_label,form .form-row .input-text,
+form .form-row textarea, form .form-row select,#icl_lang_sel_widget a,#megaMenu ul.megaMenu li li li a span, #megaMenu ul.megaMenu li li li span.um-anchoremulator span,ul.cart_list .empty,.woocommerce ul.cart_list .empty,.group_table .label a
+{
+	font-family: 'Gotham A', 'Gotham B', Arial, Helvetica, sans-serif !important;
+}
+/********************************************************************/
+/************************** Secondary font **************************/
+/********************************************************************/
+
+.cbutton,.widget h1.widget-title,.widget input[type=submit],.widget.widget_shopping_cart .total,.widget.widget_shopping_cart .total strong,ul.product_list_widget span.amount,.gbtr_tools_info,.gbtr_tools_account,.gbtr_tools_search_inputbutton,.gbtr_little_shopping_bag .title,.product_item h3,.product_item .price,a.button,button.button,input.button,#respond input#submit,#content input.button,div.product .product_brand,div.product .summary span.price,div.product .summary p.price,#content div.product .summary span.price,#content div.product .summary p.price,.quantity input.qty,#content .quantity input.qty,div.product form.cart .variations .label,#content div.product form.cart .variations .label,.gbtr_product_share ul li a,div.product .woocommerce_tabs ul.tabs li a,#content div.product .woocommerce_tabs ul.tabs li a,div.product .woocommerce-tabs ul.tabs li a,#content div.product .woocommerce-tabs ul.tabs li a,table.shop_table th,table.shop_table .product-name .category,table.shop_table td.product-subtotal,.coupon .button-coupon,.cart_totals th,.cart_totals td,form .form-row label,table.shop_table td.product-quantity,table.shop_table td.product-name .product_brand,table.shop_table td.product-total,table.shop_table tfoot th,table.shop_table tfoot td,.gbtr_checkout_method_content .title,.gbtr_left_column_my_account ul.menu_my_account,table.my_account_orders td.order-total,.minicart_total_checkout,.addresses .title h3,.sf-menu a,.shortcode_featured_1 a,.shortcode_tabgroup ul.tabs li a,.shortcode_our_services a,span.onsale,.product h3,#respond label,form label,form input[type=submit],.section_title,.entry-content-aside-title,.gbtr_little_shopping_bag_wrapper_mobiles span,.grtr_product_header_mobiles .price,.gbtr_footer_widget_copyrights,.gbtr_footer_widget_copyrights_supplemental,.woocommerce_message,.woocommerce_error,.woocommerce_info,.woocommerce-message,.woocommerce-error,.woocommerce-info,p.product,.empty_bag_button,.from_the_blog_date,.gbtr_dark_footer_wrapper .widget_nav_menu ul li,.widget.the_retailer_recent_posts .post_date,.shortcode_banner_simple_bullet,.theretailer_product_sort,.light_button,.dark_button,.light_grey_button,.dark_grey_button,.custom_button,.style_1 .products_slider_category,.style_1 .products_slider_price,.page_archive_subtitle,.shortcode_banner_simple_inside h4,.mc_var_label,.theretailer_style_intro,.wpmega-link-title,#megaMenu h2.widgettitle,.group_table .price
+{
+	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B', Arial, Helvetica, sans-serif !important;
+}
+
+
+
+/*****************************************************************************************************/
+/************************************************ Menus **********************************************/
+/*****************************************************************************************************/
+
+.sf-menu ul {
+	margin-top:0;
+}
+
+.sf-menu a {
+	text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
+}
+
+.sf-menu > li:first-child a {
+	padding-left: 0;
+}
+
+.sf-menu li li a {
+	text-shadow: none;
+}
+
+.sf-sub-indicator {
+	background: url(images/sprites.png) -436px -209px no-repeat;
+}
+
+
+
+
+/*****************************************************************************************************/
+/******************************************* Common styles *******************************************/
+/*****************************************************************************************************/
+body {
+	font-size:12px;
+}
+
+.woocommerce_message, .woocommerce_error, .woocommerce_info,
+.woocommerce-message, .woocommerce-error, .woocommerce-info{
+	font-size:12px !important;
+}
+
+.woocommerce_error li,
+.woocommerce-error li{
+	font-size:12px !important;
+}
+
+
+/* FORMS */
+.ctextfield {
+	font-size:12px;
+}
+
+.cselect {
+	font-size:12px;
+}
+
+
+.cbutton {
+	font-size:12px;
+}
+
+.quantity,
+#content .quantity {
+	margin: 0;
+}
+
+form input[type=submit] {
+	font-size:12px;
+}
+
+/* mailchimp forms */
+.widget #mc_signup_form .mc_input {
+	width: 100%;
+}
+
+
+/* side default widgets */
+
+.widget h1.widget-title {
+	font-size:12px;
+	text-transform:uppercase;
+	font-weight:900;
+	color:#000;
+	display:block;
+	padding:0 0 10px 0;
+	border-bottom:2px solid #000;
+	margin:0 0 10px 0;
+}
+
+.widget ul li ul li {
+	border-top:1px dotted #ccc;
+}
+
+.widget ul li ul li:last-child {
+	padding:5px 0 0 18px;
+}
+
+.widget input[type=text],
+.widget input[type=password] {
+	font-size:12px;
+}
+
+.widget input[type=submit] {
+	font-size:12px;
+}
+
+.widget select {
+	font-size:12px;
+}
+
+.widget.widget_shopping_cart .total strong {
+	font-size:12px;
+}
+
+
+ul.product_list_widget span.amount,
+.woocommerce ul.product_list_widget span.amount {
+	font-size:12px;
+}
+
+.tagcloud a {
+	font-size:12px !important;
+	margin-bottom:5px;
+}
+
+.after_title_reviews {
+	margin:0;
+}
+
+.reviews_nr {
+	font-size:11px;
+}
+
+.widget_layered_nav ul li {
+	padding:0 !important;
+}
+
+
+
+/* CONNECT WIDGET */
+.widget.the_retailer_connect a {
+	position:relative;
+	font-family: inherit;
+	font-weight: inherit;
+	font-style: inherit;
+	text-decoration: inherit;
+	-webkit-font-smoothing: antialiased;
+	font-size:inherit;
+	color:inherit;
+	transition: none;
+}
+
+
+.widget.the_retailer_connect a:before {
+	display:inline;
+	position:static;
+	top:0;
+	left:0;
+	text-indent:0;
+	width:0;
+	height:0;
+	padding:0;
+}
+.widget a.widget_connect_facebook:before,
+.widget a.widget_connect_pinterest:before,
+.widget a.widget_connect_linkedin:before,
+.widget a.widget_connect_twitter:before,
+.widget a.widget_connect_googleplus:before,
+.widget a.widget_connect_rss:before,
+.widget a.widget_connect_tumblr:before,
+.widget a.widget_connect_instagram:before,
+.widget a.widget_connect_youtube:before,
+.widget a.widget_connect_vimeo:before,
+ {
+	content:"";
+	width:0;
+	padding:0;
+}
+
+.widget.the_retailer_connect a:hover {
+	color:inherit;
+}
+
+.widget .widget_connect_facebook {
+	background:transparent url(images/sprites.png) no-repeat 0px -200px;
+}
+
+.widget .widget_connect_pinterest {
+	background:transparent url(images/sprites.png) no-repeat -50px -200px;
+}
+
+.widget .widget_connect_linkedin {
+	background:transparent url(images/sprites.png) no-repeat -100px -200px;
+}
+
+.widget .widget_connect_twitter {
+	background:transparent url(images/sprites.png) no-repeat -150px -200px;
+}
+
+.widget .widget_connect_googleplus {
+	background:transparent url(images/sprites.png) no-repeat -200px -200px;
+}
+
+.widget .widget_connect_rss {
+	background:transparent url(images/sprites.png) no-repeat -250px -200px;
+}
+
+.widget .widget_connect_tumblr {
+	background:transparent url(images/sprites.png) no-repeat -300px -200px;
+}
+
+.widget .widget_connect_instagram {
+	background:transparent url(images/sprites.png) no-repeat -350px -200px;
+}
+
+/* RECENT POST */
+.widget.the_retailer_recent_posts a {
+	margin:0 0 0 70px;
+}
+
+.widget.the_retailer_recent_posts .post_comments {
+	margin:0 0 0 70px;
+}
+
+.widget.the_retailer_recent_posts .post_date {
+	width:63px;
+	height:23px;
+}
+.widget.the_retailer_recent_posts .post_date_day {
+	display:inline-block;
+	padding:5px 0 0 0;
+	font-size:13px;
+}
+
+
+
+/* HEADER */
+.gbtr_header_wrapper {
+	background: url(images/bg_woodgrain.jpg) repeat-x 0 0 ;
+	height: 142px;
+	z-index: 250; /*rev slider timer bar is 200*/
+	box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.5);
+	margin-bottom: 50px;
+	position: relative;
+}
+.home .gbtr_header_wrapper,
+.page-id-1514 .gbtr_header_wrapper,
+.page-template-page-full-php .gbtr_header_wrapper /* approach page */ {
+	margin-bottom: 0;
+}
+.page-id-1514 .gbtr_light_footer_wrapper {
+	margin-top: 60px;
+}
+
+.gbtr_tools_wrapper {
+	background:none;
+	position: relative;
+	z-index: 1;
+	margin-bottom: 25px;
+}
+
+
+.gbtr_tools_search_inputtext {
+	font-size:12px;
+}
+
+.gbtr_tools_search_inputbutton {
+	border-left:none !important;
+	border-right:none !important;
+}
+
+
+.gbtr_main_menu_wrapper {
+	position:relative;
+	background-color: transparent;
+	padding-top: 5px;
+}
+
+.gbtr_main_menu_wrapper .container_12 {
+	position:relative;
+}
+
+
+.gbtr_logo {
+	padding:0 0;
+	display:block;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -470px;
+	width: 168px;
+	height: 168px;
+	z-index: 300;
+	box-shadow: 0px 0px 5px 3px rgba(70, 70, 70, 0.5);
+	-moz-box-shadow: 0px 0px 5px 3px rgba(70, 70, 70, 0.5);
+	-webkit-box-shadow: 0px 0px 5px 3px rgba(70, 70, 70, 0.5);
+	background-color: #000;
+}
+.gbtr_logo a, .gbtr_logo a img {
+	display:block;
+	width: 168px;
+	height: 168px;
+}
+
+.menus_envelope {
+	position:relative;
+	top:auto;
+	right:auto;
+	height:auto;
+	margin-top:0;
+}
+.gbtr_main_menu_wrapper .grid_9.menus_envelope {
+	float:right;
+}
+
+.menu_centered_style .mobiles_menus_wrapper {
+	margin-top:30px !important;
+}
+
+.menu_centered_style .menus_wrapper {
+	margin:0;
+}
+
+
+.gbtr_second_menu li a {
+	color:#777;
+	text-decoration:none;
+	padding:0 18px 0 18px;
+	border-left:1px solid #ccc;
+	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B'; 
+	font-weight: 300; 
+	font-style: normal;
+	text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
+}
+.gbtr_second_menu li a:hover {
+	color: #b39964;
+}
+
+.gbtr_second_menu li:first-child a {
+	border-left:0;
+	padding-left: 0;
+}
+
+
+/* CART */
+.cart_item_content_wrapper {
+	padding-left:0;
+}
+
+.cart_item_content_wrapper dl {
+	margin:0 !important;
+}
+
+.cart_item_content_wrapper dt {
+	clear:none !important;
+}
+
+.shopping_bag_centered_style {
+	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B','Gotham A', 'Gotham B', Arial, Helvetica, sans-serif !important;
+	font-weight: 700;
+}
+
+
+/* minicart */
+.gbtr_minicart_wrapper {
+	top:60px;
+}
+
+.shopping_bag_mobile_style .gbtr_minicart_wrapper {
+	top:0;
+}
+
+.menu_centered_style .gbtr_minicart_wrapper {
+	top:-30px;
+}
+
+ul.cart_list span.amount,
+.woocommerce ul.cart_list span.amount {
+	font-size:12px;
+}
+
+ul.cart_list .remove {
+	display:none;
+}
+
+.woocommerce form {
+	max-width:0;
+}
+
+ul.cart_list .empty,
+.woocommerce ul.cart_list .empty {
+	padding:30px 0 20px 60px !important;
+}
+
+ul.cart_list .empty:before {
+	top:5px;
+}
+
+/* /minicart */
+
+
+/* Banner style*/
+.gbtr_product_slider,
+.gbtr_items_slider
+{
+	height: 400px;
+	width:auto;
+	visibility:hidden;
+}
+
+
+
+/* LISTING */
+
+.listing_products .page-title {
+	width: 500px;
+}
+
+h1.entry-title,
+h1.page-title,
+h1.entry-title a,
+h1.page-title a
+{
+	font-size:30px;
+	text-transform:uppercase;
+}
+
+
+.listing_products_no_sidebar .product_item {
+	margin:0!important;
+}
+
+.slider .product_item {
+	margin:0 50px 30px 0px !important;
+	display:block;
+	float:left;
+	margin-bottom:0 !important;
+}
+
+li.product-category {
+	padding:0 49px 30px 0px;
+}

@@ -1,8 +1,10 @@
 /*
 Theme Name: PS Retailer
-Description: This is a theme for Phil+Sebastian Roasters based on Get Bowtied's The Retailer 1.7.
-Author: M. Pringle, and J. Herman
-Version: 1.7.1
+Description: This is a theme for Phil+Sebastian Roasters which is a child theme for The Retailer.
+Author: M. Pringle, J. Herman, and A. Aquino
+Author URI: http: //www.getbowtied.com/
+Template: theretailer
+Version: 1.8.1
 */
 
 
@@ -233,7 +235,7 @@ form .form-row textarea, form .form-row select,#icl_lang_sel_widget a,#megaMenu 
 /************************** Secondary font **************************/
 /********************************************************************/
 
-.cbutton,.widget h1.widget-title,.widget input[type=submit],.widget.widget_shopping_cart .total,.widget.widget_shopping_cart .total strong,ul.product_list_widget span.amount,.gbtr_tools_info,.gbtr_tools_account,.gbtr_tools_search_inputbutton,.gbtr_little_shopping_bag .title,.product_item h3,.product_item .price,a.button,button.button,input.button,#respond input#submit,#content input.button,div.product .product_brand,div.product .summary span.price,div.product .summary p.price,#content div.product .summary span.price,#content div.product .summary p.price,.quantity input.qty,#content .quantity input.qty,div.product form.cart .variations .label,#content div.product form.cart .variations .label,.gbtr_product_share ul li a,div.product .woocommerce_tabs ul.tabs li a,#content div.product .woocommerce_tabs ul.tabs li a,div.product .woocommerce-tabs ul.tabs li a,#content div.product .woocommerce-tabs ul.tabs li a,table.shop_table th,table.shop_table .product-name .category,table.shop_table td.product-subtotal,.coupon .button-coupon,.cart_totals th,.cart_totals td,form .form-row label,table.shop_table td.product-quantity,table.shop_table td.product-name .product_brand,table.shop_table td.product-total,table.shop_table tfoot th,table.shop_table tfoot td,.gbtr_checkout_method_content .title,.gbtr_left_column_my_account ul.menu_my_account,table.my_account_orders td.order-total,.minicart_total_checkout,.addresses .title h3,.sf-menu a,.shortcode_featured_1 a,.shortcode_tabgroup ul.tabs li a,.shortcode_our_services a,span.onsale,.product h3,#respond label,form label,form input[type=submit],.section_title,.entry-content-aside-title,.gbtr_little_shopping_bag_wrapper_mobiles span,.grtr_product_header_mobiles .price,.gbtr_footer_widget_copyrights,.gbtr_footer_widget_copyrights_supplemental,.woocommerce_message,.woocommerce_error,.woocommerce_info,.woocommerce-message,.woocommerce-error,.woocommerce-info,p.product,.empty_bag_button,.from_the_blog_date,.gbtr_dark_footer_wrapper .widget_nav_menu ul li,.widget.the_retailer_recent_posts .post_date,.shortcode_banner_simple_bullet,.theretailer_product_sort,.light_button,.dark_button,.light_grey_button,.dark_grey_button,.custom_button,.style_1 .products_slider_category,.style_1 .products_slider_price,.page_archive_subtitle,.shortcode_banner_simple_inside h4,.mc_var_label,.theretailer_style_intro,.wpmega-link-title,#megaMenu h2.widgettitle,.group_table .price
+.cbutton,.widget h4.widget-title,.widget input[type=submit],.widget.widget_shopping_cart .total,.widget.widget_shopping_cart .total strong,ul.product_list_widget span.amount,.gbtr_tools_info,.gbtr_tools_account,.gbtr_tools_search_inputbutton,.gbtr_little_shopping_bag .title,.product_item h3,.product_item .price,a.button,button.button,input.button,#respond input#submit,#content input.button,div.product .product_brand,div.product .summary span.price,div.product .summary p.price,#content div.product .summary span.price,#content div.product .summary p.price,.quantity input.qty,#content .quantity input.qty,div.product form.cart .variations .label,#content div.product form.cart .variations .label,.gbtr_product_share ul li a,div.product .woocommerce_tabs ul.tabs li a,#content div.product .woocommerce_tabs ul.tabs li a,div.product .woocommerce-tabs ul.tabs li a,#content div.product .woocommerce-tabs ul.tabs li a,table.shop_table th,table.shop_table .product-name .category,table.shop_table td.product-subtotal,.coupon .button-coupon,.cart_totals th,.cart_totals td,form .form-row label,table.shop_table td.product-quantity,table.shop_table td.product-name .product_brand,table.shop_table td.product-total,table.shop_table tfoot th,table.shop_table tfoot td,.gbtr_checkout_method_content .title,.gbtr_left_column_my_account ul.menu_my_account,table.my_account_orders td.order-total,.minicart_total_checkout,.addresses .title h3,.sf-menu a,.shortcode_featured_1 a,.shortcode_tabgroup ul.tabs li a,.shortcode_our_services a,span.onsale,.product h3,#respond label,form label,form input[type=submit],.section_title,.entry-content-aside-title,.gbtr_little_shopping_bag_wrapper_mobiles span,.grtr_product_header_mobiles .price,.gbtr_footer_widget_copyrights,.gbtr_footer_widget_copyrights_supplemental,.woocommerce_message,.woocommerce_error,.woocommerce_info,.woocommerce-message,.woocommerce-error,.woocommerce-info,p.product,.empty_bag_button,.from_the_blog_date,.gbtr_dark_footer_wrapper .widget_nav_menu ul li,.widget.the_retailer_recent_posts .post_date,.shortcode_banner_simple_bullet,.theretailer_product_sort,.light_button,.dark_button,.light_grey_button,.dark_grey_button,.custom_button,.style_1 .products_slider_category,.style_1 .products_slider_price,.page_archive_subtitle,.shortcode_banner_simple_inside h4,.mc_var_label,.theretailer_style_intro,.wpmega-link-title,#megaMenu h2.widgettitle,.group_table .price
 {
 	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B', Arial, Helvetica, sans-serif !important;
 }
@@ -1046,7 +1048,7 @@ form input[type=submit]:hover {
 	padding:0 0 40px 0;
 }
 
-.widget h1.widget-title {
+.widget h4.widget-title {
 	font-size:12px;
 	text-transform:uppercase;
 	font-weight:900;
@@ -7267,7 +7269,6 @@ pre {
 ul.products {
 	padding:0;
 	margin:0;
-	width:960px;
 }
 
 ul.products li.product {
@@ -9278,6 +9279,62 @@ list-style-type: none !important;
 	display:none;
 }
 
+.out_of_stock_badge_single {	
+	min-height: 26px;
+	width: 50px;
+	padding: 17px 5px;
+	position: absolute;
+	top: 108px;
+	left: 478px;
+	margin: 0;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	background: #b3b3b3;
+	color: #fff;
+	font-style: italic;
+	font-size: 11px;
+	text-align: center;
+	line-height: 13px;
+	font-weight: bold;
+	z-index: 20;
+	text-transform:uppercase;
+	/*-webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;*/
+}
+
+.out_of_stock_badge_single.first_position {
+	top: 63px;
+}
+
+.out_of_stock_badge_loop {	
+	min-height: 20px;
+	width: 36px;
+	padding: 13px 5px;
+	position: absolute;
+	top: -10px;
+	left: 97px;
+	margin: 0;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	background: #b3b3b3;
+	color: #fff;
+	font-style: italic;
+	font-size: 10px;
+	text-align: center;
+	line-height: 13px;
+	z-index: 50;
+	text-transform:uppercase;
+	line-height:10px;
+}
+
+.out_of_stock_badge_loop.first_position {
+	left: 135px;
+}
+
 /*****************************************************************************************************/
 /******************************************* /Common styles ******************************************/
 /*****************************************************************************************************/
@@ -9474,6 +9531,16 @@ list-style-type: none !important;
 	}
 	
 	.product_main_infos span.onsale {
+		top: 70px;
+		left: 477px;
+	}
+	
+	.out_of_stock_badge_single {	
+		top: 115px;
+		left: 477px;
+	}
+	
+	.out_of_stock_badge_single.first_position {
 		top: 70px;
 		left: 477px;
 	}
