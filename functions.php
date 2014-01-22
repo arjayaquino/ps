@@ -520,11 +520,12 @@ function shortcode_media_slider_video( $atts, $content = null ) {
 
 
 
-// [custom_featured_coffee]
-function shortcode_custom_featured_coffee($atts, $content = null) {
+// [custom_featured_by_category]
+function shortcode_custom_featured_by_category($atts, $content = null) {
 	$sliderrandomid = rand();
 	extract(shortcode_atts(array(
 		"title" => '',
+		"category" => '',
 		'per_page'  => '12',
         'orderby' => 'date',
         'order' => 'desc'
@@ -637,7 +638,7 @@ function shortcode_custom_featured_coffee($atts, $content = null) {
                         'posts_per_page' => $per_page,
 						'orderby' => $orderby,
 						'order' => $order,
-						'product_cat' => 'coffee'
+						'product_cat' => esc_attr($category)
                     );
                     
                     $products = new WP_Query( $args );
@@ -646,7 +647,14 @@ function shortcode_custom_featured_coffee($atts, $content = null) {
                                 
                         <?php while ( $products->have_posts() ) : $products->the_post(); ?>
                     
-                            <?php woocommerce_get_template_part( 'content', 'coffee-product' ); ?>
+                            <?php 
+								//coffee categorie gets something special
+								if(esc_attr($category) == 'coffee'){
+									woocommerce_get_template_part( 'content', 'coffee-product' );
+								} else {
+									woocommerce_get_template_part( 'content', 'product' );
+								}
+							?>
                 
                         <?php endwhile; // end of the loop. ?>
                         
@@ -679,7 +687,7 @@ add_shortcode("custom_images_slider", "shortcode_custom_images_slider");
 add_shortcode("media_slider", "shortcode_media_slider");
 add_shortcode("media_slider_image", "shortcode_media_slider_image");
 add_shortcode("media_slider_video", "shortcode_media_slider_video");
-add_shortcode("custom_featured_coffee", "shortcode_custom_featured_coffee");
+add_shortcode("custom_featured_by_category", "shortcode_custom_featured_by_category");
 
 
 /**********************************************/

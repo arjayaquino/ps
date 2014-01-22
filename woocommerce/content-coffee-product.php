@@ -46,19 +46,19 @@ $woocommerce_loop['loop']++;
 
                     <div class="loop_products_thumbnail_img_wrapper"><?php echo get_the_post_thumbnail( $post->ID, 'shop_catalog') ?></div>
                     
+					<div class="info-overlay">
+						<h4>Tasting Notes</h4>
+						<?php
+						$tastingNotes = explode(',', get_post_meta($post->ID, 'Tasting Notes', true));
+
+						foreach($tastingNotes as $tastingNote){
+						?>
+							<span><?php echo $tastingNote; ?></span>
+						<?php } ?>	
+					</div>
+
                 </a>
                 <div class="clr"></div>
-				
-				<div class="info-overlay">
-					<h4>Tasting Notes</h4>
-					<?php
-					$tastingNotes = explode(',', get_post_meta($post->ID, 'Tasting Notes', true));
-				
-					foreach($tastingNotes as $tastingNote){
-					?>
-						<span><?php echo $tastingNote; ?></span>
-					<?php } ?>	
-				</div>
 				
                 <?php if ( (!$theretailer_theme_options['catalog_mode']) || ($theretailer_theme_options['catalog_mode'] == 0) ) { ?>
 				
