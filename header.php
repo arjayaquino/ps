@@ -23,14 +23,14 @@ global $theretailer_theme_options;
 <!-- ******************************************************************** -->
 
 <link rel="apple-touch-icon-precomposed" href="<?php if ($theretailer_theme_options['favicon_retina']) { echo wp_make_link_relative($theretailer_theme_options['favicon_retina']); ?>
-<?php } else { ?><?php echo wp_make_link_relative(get_template_directory_uri()); ?>/apple-touch-icon-precomposed.png<?php } ?>" />
+<?php } else { ?><?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/apple-touch-icon-precomposed.png<?php } ?>" />
 
 <!-- ******************************************************************** -->
 <!-- ************************ Custom Favicon **************************** -->
 <!-- ******************************************************************** -->
 
 <link rel="shortcut icon" href="<?php if ($theretailer_theme_options['favicon_image']) { echo wp_make_link_relative($theretailer_theme_options['favicon_image']); ?>
-<?php } else { ?><?php echo wp_make_link_relative(get_template_directory_uri()); ?>/favicon.png<?php } ?>" />
+<?php } else { ?><?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/favicon.png<?php } ?>" />
 
 <!-- ******************************************************************** -->
 <!-- *********************** Custom Javascript ************************** -->
@@ -47,13 +47,20 @@ global $theretailer_theme_options;
 <!-- *********************** cloud fonts ******************************** -->
 <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6070052/774662/css/fonts.css" />
 
+<?php if(is_wholesale_template()){ ?>
+<!-- *********************** wholesale ******************************** -->
+	<link rel="stylesheet" type="text/css" href="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/wholesale.css" />
+	<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/wholesaleorders.js"></script>
+<?php } ?>
+
+
 </head>
 
 <!-- *********************************************************************** -->
 <!-- ********************* EVERYTHING STARTS HERE ************************** -->
 <!-- *********************************************************************** -->
 
-<body <?php body_class(); ?>>
+<body id="ps-store" <?php body_class(); ?>>
     
     <div id="global_wrapper">
 

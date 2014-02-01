@@ -226,8 +226,8 @@ p:empty {
 /************************** Main font **************************/
 /***************************************************************/
 
-body,.ctextfield,.cselect,.ctextarea,.ccheckbox_group label,.cradio_group label,.gbtr_light_footer_no_widgets,.gbtr_widget_footer_from_the_blog .gbtr_widget_item_title,.widget input[type=text],.widget input[type=password],.widget select,.gbtr_tools_search_inputtext,.gbtr_second_menu,.gbtr_little_shopping_bag .overview,.gbtr_featured_section_title,h1.entry-title,h1.page-title,h1.entry-title a,h1.page-title a,em.items_found,em.items_found_cart,.product_item p,div.product .product_title,#content div.product .product_title,.gbtr_product_description,div.product form.cart .variations .value select,#content div.product form.cart .variations .value select,div.product div.product_meta,#content div.product div.product_meta,div.product .woocommerce_tabs .panel,#content div.product .woocommerce_tabs .panel,#content div.product div.product_meta,div.product .woocommerce-tabs .panel,#content div.product .woocommerce-tabs .panel,.coupon .input-text,.cart_totals .shipping td,.shipping_calculator h3,.checkout h3,.gbtr_checkout_method_header,.checkout .input-text,.checkout #shiptobilling label,table.shop_table tfoot .shipping td,.gbtr_checkout_login .input-text,table.my_account orders .order-number a,.myaccount_user,.order-info,.myaccount_user span,.order-info span,.gbtr_my_account_wrapper input,.gbtr_my_account_wrapper select,.gbtr_login_register_wrapper h2,.gbtr_login_register_wrapper input,.sf-menu li li a,div.product form.cart .variations .reset_variations,#content div.product form.cart .variations .reset_variations,.shortcode_banner_simple_inside h3,.shortcode_banner_simple_inside h3 strong,.woocommerce_message a.button,.woocommerce-message a.button,.mc_var_label,form .form-row .input-text,
-form .form-row textarea, form .form-row select,#icl_lang_sel_widget a,#megaMenu ul.megaMenu li li li a span, #megaMenu ul.megaMenu li li li span.um-anchoremulator span,ul.cart_list .empty,.woocommerce ul.cart_list .empty,.group_table .label a
+body#ps-store, body#ps-store .ctextfield, body#ps-store .cselect, body#ps-store .ctextarea, body#ps-store .ccheckbox_group label, body#ps-store .cradio_group label, body#ps-store .gbtr_light_footer_no_widgets, body#ps-store .gbtr_widget_footer_from_the_blog .gbtr_widget_item_title, body#ps-store .widget input[type=text], body#ps-store .widget input[type=password], body#ps-store .widget select, body#ps-store .gbtr_tools_search_inputtext, body#ps-store .gbtr_second_menu, body#ps-store .gbtr_little_shopping_bag .overview, body#ps-store .gbtr_featured_section_title, body#ps-store h1.entry-title, body#ps-store h1.page-title, body#ps-store h1.entry-title a, body#ps-store h1.page-title a, body#ps-store em.items_found, body#ps-store em.items_found_cart, body#ps-store .product_item p, body#ps-store div.product .product_title, body#ps-store #content div.product .product_title, body#ps-store .gbtr_product_description, body#ps-store div.product form.cart .variations .value select, body#ps-store #content div.product form.cart .variations .value select, body#ps-store div.product div.product_meta, body#ps-store #content div.product div.product_meta, body#ps-store div.product .woocommerce_tabs .panel, body#ps-store #content div.product .woocommerce_tabs .panel, body#ps-store #content div.product div.product_meta, body#ps-store div.product .woocommerce-tabs .panel, body#ps-store #content div.product .woocommerce-tabs .panel, body#ps-store .coupon .input-text, body#ps-store .cart_totals .shipping td, body#ps-store .shipping_calculator h3, body#ps-store .checkout h3, body#ps-store .gbtr_checkout_method_header, body#ps-store .checkout .input-text, body#ps-store .checkout #shiptobilling label, body#ps-store table.shop_table tfoot .shipping td, body#ps-store .gbtr_checkout_login .input-text, body#ps-store table.my_account orders .order-number a, body#ps-store .myaccount_user, body#ps-store .order-info, body#ps-store .myaccount_user span, body#ps-store .order-info span, body#ps-store .gbtr_my_account_wrapper input, body#ps-store .gbtr_my_account_wrapper select, body#ps-store .gbtr_login_register_wrapper h2, body#ps-store .gbtr_login_register_wrapper input, body#ps-store .sf-menu li li a, body#ps-store div.product form.cart .variations .reset_variations, body#ps-store #content div.product form.cart .variations .reset_variations, body#ps-store .shortcode_banner_simple_inside h3, body#ps-store .shortcode_banner_simple_inside h3 strong, body#ps-store .woocommerce_message a.button, body#ps-store .woocommerce-message a.button, body#ps-store .mc_var_label, body#ps-store form .form-row .input-text,
+body#ps-store form .form-row textarea, body#ps-store  form .form-row select, body#ps-store #icl_lang_sel_widget a, body#ps-store #megaMenu ul.megaMenu li li li a span, body#ps-store  #megaMenu ul.megaMenu li li li span.um-anchoremulator span, body#ps-store ul.cart_list .empty, body#ps-store .woocommerce ul.cart_list .empty, body#ps-store .group_table .label a
 {
 	font-family: 'Gotham A', 'Gotham B', Arial, Helvetica, sans-serif !important;
 }
@@ -235,7 +235,7 @@ form .form-row textarea, form .form-row select,#icl_lang_sel_widget a,#megaMenu 
 /************************** Secondary font **************************/
 /********************************************************************/
 
-.cbutton,.widget h4.widget-title,.widget input[type=submit],.widget.widget_shopping_cart .total,.widget.widget_shopping_cart .total strong,ul.product_list_widget span.amount,.gbtr_tools_info,.gbtr_tools_account,.gbtr_tools_search_inputbutton,.gbtr_little_shopping_bag .title,.product_item h3,.product_item .price,a.button,button.button,input.button,#respond input#submit,#content input.button,div.product .product_brand,div.product .summary span.price,div.product .summary p.price,#content div.product .summary span.price,#content div.product .summary p.price,.quantity input.qty,#content .quantity input.qty,div.product form.cart .variations .label,#content div.product form.cart .variations .label,.gbtr_product_share ul li a,div.product .woocommerce_tabs ul.tabs li a,#content div.product .woocommerce_tabs ul.tabs li a,div.product .woocommerce-tabs ul.tabs li a,#content div.product .woocommerce-tabs ul.tabs li a,table.shop_table th,table.shop_table .product-name .category,table.shop_table td.product-subtotal,.coupon .button-coupon,.cart_totals th,.cart_totals td,form .form-row label,table.shop_table td.product-quantity,table.shop_table td.product-name .product_brand,table.shop_table td.product-total,table.shop_table tfoot th,table.shop_table tfoot td,.gbtr_checkout_method_content .title,.gbtr_left_column_my_account ul.menu_my_account,table.my_account_orders td.order-total,.minicart_total_checkout,.addresses .title h3,.sf-menu a,.shortcode_featured_1 a,.shortcode_tabgroup ul.tabs li a,.shortcode_our_services a,span.onsale,.product h3,#respond label,form label,form input[type=submit],.section_title,.entry-content-aside-title,.gbtr_little_shopping_bag_wrapper_mobiles span,.grtr_product_header_mobiles .price,.gbtr_footer_widget_copyrights,.gbtr_footer_widget_copyrights_supplemental,.woocommerce_message,.woocommerce_error,.woocommerce_info,.woocommerce-message,.woocommerce-error,.woocommerce-info,p.product,.empty_bag_button,.from_the_blog_date,.gbtr_dark_footer_wrapper .widget_nav_menu ul li,.widget.the_retailer_recent_posts .post_date,.shortcode_banner_simple_bullet,.theretailer_product_sort,.light_button,.dark_button,.light_grey_button,.dark_grey_button,.custom_button,.style_1 .products_slider_category,.style_1 .products_slider_price,.page_archive_subtitle,.shortcode_banner_simple_inside h4,.mc_var_label,.theretailer_style_intro,.wpmega-link-title,#megaMenu h2.widgettitle,.group_table .price
+body#ps-store .cbutton, body#ps-store .widget h4.widget-title, body#ps-store .widget input[type=submit], body#ps-store .widget.widget_shopping_cart .total, body#ps-store .widget.widget_shopping_cart .total strong, body#ps-store ul.product_list_widget span.amount, body#ps-store .gbtr_tools_info, body#ps-store .gbtr_tools_account, body#ps-store .gbtr_tools_search_inputbutton, body#ps-store .gbtr_little_shopping_bag .title, body#ps-store .product_item h3, body#ps-store .product_item .price, body#ps-store a.button, body#ps-store button.button, body#ps-store input.button, body#ps-store #respond input#submit, body#ps-store #content input.button, body#ps-store div.product .product_brand, body#ps-store div.product .summary span.price, body#ps-store div.product .summary p.price, body#ps-store #content div.product .summary span.price, body#ps-store #content div.product .summary p.price, body#ps-store .quantity input.qty, body#ps-store #content .quantity input.qty, body#ps-store div.product form.cart .variations .label, body#ps-store #content div.product form.cart .variations .label, body#ps-store .gbtr_product_share ul li a, body#ps-store div.product .woocommerce_tabs ul.tabs li a, body#ps-store #content div.product .woocommerce_tabs ul.tabs li a, body#ps-store div.product .woocommerce-tabs ul.tabs li a, body#ps-store #content div.product .woocommerce-tabs ul.tabs li a, body#ps-store table.shop_table th, body#ps-store table.shop_table .product-name .category, body#ps-store table.shop_table td.product-subtotal, body#ps-store .coupon .button-coupon, body#ps-store .cart_totals th, body#ps-store .cart_totals td, body#ps-store form .form-row label, body#ps-store table.shop_table td.product-quantity, body#ps-store table.shop_table td.product-name .product_brand, body#ps-store table.shop_table td.product-total, body#ps-store table.shop_table tfoot th, body#ps-store table.shop_table tfoot td, body#ps-store .gbtr_checkout_method_content .title, body#ps-store .gbtr_left_column_my_account ul.menu_my_account, body#ps-store table.my_account_orders td.order-total, body#ps-store .minicart_total_checkout, body#ps-store .addresses .title h3, body#ps-store .sf-menu a, body#ps-store .shortcode_featured_1 a, body#ps-store .shortcode_tabgroup ul.tabs li a, body#ps-store .shortcode_our_services a, body#ps-store span.onsale, body#ps-store .product h3, body#ps-store #respond label, body#ps-store form label, body#ps-store form input[type=submit], body#ps-store .section_title, body#ps-store .entry-content-aside-title, body#ps-store .gbtr_little_shopping_bag_wrapper_mobiles span, body#ps-store .grtr_product_header_mobiles .price, body#ps-store .gbtr_footer_widget_copyrights, body#ps-store .gbtr_footer_widget_copyrights_supplemental, body#ps-store .woocommerce_message, body#ps-store .woocommerce_error, body#ps-store .woocommerce_info, body#ps-store .woocommerce-message, body#ps-store .woocommerce-error, body#ps-store .woocommerce-info, body#ps-store p.product, body#ps-store .empty_bag_button, body#ps-store .from_the_blog_date, body#ps-store .gbtr_dark_footer_wrapper .widget_nav_menu ul li, body#ps-store .widget.the_retailer_recent_posts .post_date, body#ps-store .shortcode_banner_simple_bullet, body#ps-store .theretailer_product_sort, body#ps-store .light_button, body#ps-store .dark_button, body#ps-store .light_grey_button, body#ps-store .dark_grey_button, body#ps-store .custom_button, body#ps-store .style_1 .products_slider_category, body#ps-store .style_1 .products_slider_price, body#ps-store .page_archive_subtitle, body#ps-store .shortcode_banner_simple_inside h4, body#ps-store .mc_var_label, body#ps-store .theretailer_style_intro, body#ps-store .wpmega-link-title, body#ps-store #megaMenu h2.widgettitle, body#ps-store .group_table .price
 {
 	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B', Arial, Helvetica, sans-serif !important;
 }
@@ -1048,7 +1048,8 @@ form input[type=submit]:hover {
 	padding:0 0 40px 0;
 }
 
-.widget h4.widget-title {
+.widget h4.widget-title,
+.wholesale-category-title {
 	font-size:12px;
 	text-transform:uppercase;
 	font-weight:900;
@@ -3102,7 +3103,7 @@ input.button,
 	box-shadow:inset 0 0 0 rgba(0,0,0,0.075), inset 0 0 0 rgba(255,255,255,0.3), 0 0 0 rgba(0,0,0,0.1) !important;
 	font-size:12px !important;
 	text-transform:uppercase !important;
-	font-weight:900 !important;
+	/*font-weight:900 !important;*/
 	max-width:880px !important;
 	-webkit-appearance: none;
 }
@@ -3142,6 +3143,23 @@ input.button,
     -moz-transition: opacity 0.2s ease-out;
     transition: opacity 0.2s ease-out;*/
 }
+
+a.button:disabled,
+button.button:disabled,
+input.button:disabled,
+#respond input#submit:disabled,
+#content input.button:disabled {
+	background:#e6e6e6;
+}
+
+a.button:disabled:hover,
+button.button:disabled:hover,
+input.button:disabled:hover,
+#respond input#submit:disabled:hover,
+#content input.button:disabled:hover {
+	background:#e6e6e6;
+}
+
 .product_button a.button:hover,
 .product_button button.button:hover,
 .product_button input.button:hover,
@@ -10711,3 +10729,37 @@ list-style-type: none !important;
 /*****************************************************************************************************/
 /******************************************* /Media Queries ******************************************/
 /*****************************************************************************************************/
+
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
+
+/* border box style */
+.bbs {
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}

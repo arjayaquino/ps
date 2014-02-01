@@ -402,7 +402,7 @@ function shortcode_media_slider($atts, $content=null, $code) {
 	
 	<script>
 	(function($){
-	   $(function(){
+	   $(window).load(function(){
 			
 			/* items_slider */
 			$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
@@ -416,6 +416,10 @@ function shortcode_media_slider($atts, $content=null, $code) {
 				scrollbarBorder: '0',
 				scrollbarMargin: '0',
 				scrollbarOpacity: '1',
+				autoSlide: true,
+				autoSlideTimer: 4000,
+				autoSlideHoverPause: true,
+				infiniteSlider:true,
 				navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_next'),
 				navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_previous'),
 				onSliderLoaded: update_height_products_slider,
@@ -542,7 +546,7 @@ function shortcode_custom_featured_by_category($atts, $content = null) {
     
     <script>
 	(function($){
-		$(function(){
+		$(window).load(function(){
 			var $slider = $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?>');
 			/* items_slider */
 			$slider.find('.gbtr_items_slider').iosSlider({
@@ -610,7 +614,7 @@ function shortcode_custom_featured_by_category($atts, $content = null) {
 	</script>
     
     <div class="gbtr_items_slider_id_<?php echo $sliderrandomid ?>">
-    
+    	
         <div class="gbtr_items_sliders_header">
             <div class="gbtr_items_sliders_title">
                 <div class="gbtr_featured_section_title"><strong><?php echo $title ?></strong></div>
@@ -678,7 +682,63 @@ function shortcode_custom_featured_by_category($atts, $content = null) {
 	return $content;
 }
 
+//[wholesale_category_listing]
+function shortcode_wholesale_category_listing($atts, $content = null) {
+	extract(shortcode_atts(array(
+		"title" => '',
+		"category" => '',
+		'per_page'  => '12',
+        'orderby' => 'date',
+        'order' => 'desc'
+	), $atts));
+	ob_start();
+	?>
+    
+    <?php 
+	/**
+	* Check if WooCommerce is active
+	**/
+	if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+	?>
+		<div id="cat-<?php echo esc_attr($category); ?>" class="wholesale-category">
+			<h4 class="wholesale-category-title widget-title"><?php echo esc_attr($title); ?></h4>
+			<ul>
+				<?php
+			    $args = array(
+			        'post_status' => 'publish',
+			        'post_type' => 'product',
+					'ignore_sticky_posts'   => 1,
+			        'posts_per_page' => $per_page,
+					'orderby' => $orderby,
+					'order' => $order,
+					'product_cat' => esc_attr($category)
+			    );
+    
+			    $products = new WP_Query( $args );
+    
+			    if ( $products->have_posts() ) : ?>
+                
+			        <?php while ( $products->have_posts() ) : $products->the_post(); ?>
+    
+			            <?php 
+							woocommerce_get_template_part( 'content', 'wholesale-product' );
+						?>
 
+			        <?php endwhile; // end of the loop. ?>
+        
+			    <?php
+			    endif; 
+			    ?>
+			</ul>
+		</div>
+	
+    <?php } ?>
+
+	<?php
+	$content = ob_get_contents();
+	ob_end_clean();
+	return $content;
+}
 
 
 add_shortcode('banner_full_width', 'banner_full_width');
@@ -688,6 +748,7 @@ add_shortcode("media_slider", "shortcode_media_slider");
 add_shortcode("media_slider_image", "shortcode_media_slider_image");
 add_shortcode("media_slider_video", "shortcode_media_slider_video");
 add_shortcode("custom_featured_by_category", "shortcode_custom_featured_by_category");
+add_shortcode("wholesale_category_listing", "shortcode_wholesale_category_listing");
 
 
 /**********************************************/
@@ -751,3 +812,10 @@ if( isset( $available_methods['free_shipping'] ) AND isset( $available_methods['
 	return $available_methods;
 }
 
+
+/**********************************************/
+/************ Helpers **********/
+/**********************************************/
+function is_wholesale_template(){
+	return is_page_template('page-wholesale-orders.php');
+}

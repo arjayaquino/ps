@@ -1,0 +1,76 @@
+#wholesale-content {
+	margin-bottom:25px;
+}
+
+#wholesale-content .cat-item {
+	padding-left:24px;
+	position:relative;
+}
+#wholesale-content .cat-item input {
+	left:5px;
+	position:absolute;
+	top:9px;
+}
+
+
+.wholesale-category {
+	display:none;
+	opacity:0;
+	filter:alpha(opacity=0);
+}
+
+.wholesale-category ul{
+	padding-bottom: 40px;
+}
+
+.wholesale-category .wholesale-product {
+	border-bottom: 1px dotted #ccc !important;
+	padding:10px 0;
+}
+
+.wholesale-category .wholesale-product:last-child{
+	border-bottom:none !important;
+}
+
+.wholesale-category .wholesale-product .product-actions {
+	overflow:hidden;
+}
+
+.wholesale-category .wholesale-product .single_add_to_cart_button {
+	display:none !important;
+}
+
+.wholesale-category .wholesale-product .product-info,
+.wholesale-category .wholesale-product .product-actions {
+	float :left;
+	width:50%;
+}
+
+.wholesale-category .wholesale-product .product-info {
+	padding-right:15px;
+}
+
+.wholesale-category .wholesale-product .product-info{
+	font-size: 13px;
+}
+
+.wholesale-category .wholesale-product .product-info a {
+	font-weight:bold;
+}
+
+.wholesale-category .wholesale-product .product-actions .variations .label{
+	padding-right:5px;
+	vertical-align:middle;
+}
+
+.wholesale-category .wholesale-product .product-actions .variations label{
+	padding:0;
+}
+
+.wholesale-category .wholesale-product .product-actions .price {
+	font-size:13px !important;
+}
+
+.wholesale-category .wholesale-product .product-actions .gbtr_add_to_cart_simple{
+	padding:0;
+}
