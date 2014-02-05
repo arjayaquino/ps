@@ -8,6 +8,7 @@
 		var currFormIndex = 0;
 		var formsToSubmit = [];
 		
+		
 		function init(){
 			setTimeout(function(){
 				//$wholesaleCatContainer.find(".single_add_to_cart_button").addClass("add_to_cart_button product_type_simple");
@@ -81,6 +82,7 @@
 		function submitAddToCartForms(){
 			isFormSubmitting = true;
 			$placeOrderButton.prop("disabled", isFormSubmitting).text("Submitting...");
+			$(".fr-loading").show();
 			
 	  		var allFormsSubmittedDeferred = new $.Deferred();
 			
@@ -110,10 +112,12 @@
 			}
 		}
 		
-		
+		//when all items are added to cart, send directly to checkout page
 		function allItemsAddedToCart(){
-			isFormSubmitting = false;
+			/*isFormSubmitting = false;
 			$placeOrderButton.prop("disabled", isFormSubmitting).text("Place Order");
+			$(".fr-loading").hide();*/
+			window.location = $wholesaleContent.data("checkouturl");
 		}
 		
 	});

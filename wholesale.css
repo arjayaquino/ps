@@ -74,3 +74,11 @@
 .wholesale-category .wholesale-product .product-actions .gbtr_add_to_cart_simple{
 	padding:0;
 }
+
+#wholesale-content .form-button-bar{
+	overflow:hidden;
+}
+
+#wholesale-content .form-button-bar button{
+	float:right;
+}

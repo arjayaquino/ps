@@ -4,6 +4,9 @@
     <?php } else echo wp_make_link_relative($theretailer_theme_options['site_logo']); ?>" alt="" />
     </a>
 </div>
+
+<?php if(!current_user_can("order_wholesale")) : //don't show nav for wholesale'?>
+	
 <div class="gbtr_main_menu_wrapper">
     <div class="container_12">        
         <script type="text/javascript">
@@ -203,7 +206,7 @@
                 /**
                 * Check if WooCommerce is active
                 **/
-                if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+                if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) )) {
                 
                 ?>
                 
@@ -303,3 +306,5 @@
         
     </div>
 </div>
+
+<?php endif; //don't show for wholesale'?>

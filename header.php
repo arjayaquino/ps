@@ -53,6 +53,18 @@ global $theretailer_theme_options;
 	<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/wholesaleorders.js"></script>
 <?php } ?>
 
+<?php
+$isWholesaleCustomer = current_user_can("order_wholesale");
+$isWholesaleCafeCustomer = current_user_can("order_wholesale_cafe");
+$isShowPrice = (!$isWholesaleCustomer) || ($isWholesaleCustomer && $isWholesaleCafeCustomer);  //only show totals for regular or cafe wholesale customers
+?>
+
+<?php
+global $post;
+if(has_shortcode( $post->post_content, 'media_slider') ) { ?>
+	<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/froogaloop.js"></script>
+<?php } ?>
+
 
 </head>
 
@@ -62,7 +74,7 @@ global $theretailer_theme_options;
 
 <body id="ps-store" <?php body_class(); ?>>
     
-    <div id="global_wrapper">
+    <div id="global_wrapper" <?php if(!$isShowPrice) { echo 'class="wholesale-user"'; } ?> >
 
         <div class="gbtr_header_wrapper">
             <?php if ( (!$theretailer_theme_options['hide_topbar']) || ($theretailer_theme_options['hide_topbar'] == 0) ) { ?>

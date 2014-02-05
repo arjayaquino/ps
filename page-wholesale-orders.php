@@ -4,7 +4,7 @@ Template Name: Wholesale Order Page
 */
 
 global $theretailer_theme_options;
-
+global $woocommerce;
 global $wp_query;
 
 $archive_product_sidebar = 'no';
@@ -27,9 +27,11 @@ $args = array(
 
 $product_categories = get_terms('product_cat', $args );
 
+$checkout_url = $woocommerce->cart->get_checkout_url();
+
 ?>
 
-<div id="wholesale-content" class="container_12">
+<div id="wholesale-content" class="container_12" data-checkouturl="<?php echo $checkout_url; ?>">
 	
 		<!-- CATEGORY SIDE MENU -->
         <div class="grid_3">
@@ -71,7 +73,7 @@ $product_categories = get_terms('product_cat', $args );
 				
 			</div>
 			
-			<p>
+			<p class="form-button-bar">
 				<button type="submit" class="button" id="placeorder">Place Order</button>
 			</p>
 		</div>

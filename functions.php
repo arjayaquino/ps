@@ -403,9 +403,9 @@ function shortcode_media_slider($atts, $content=null, $code) {
 	<script>
 	(function($){
 	   $(window).load(function(){
-			
+			var $slider = $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider');
 			/* items_slider */
-			$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
+			$slider.iosSlider({
 				snapToChildren: true,
 				desktopClickDrag: true,
 				scrollbar: true,
@@ -452,7 +452,25 @@ function shortcode_media_slider($atts, $content=null, $code) {
 			}
 
 			// need to update the slider to get the image widths working correctly
-			$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider('update');
+			$slider.iosSlider('update');
+			
+			
+			//vimeo player listeners
+			$slider.find(".media_slider_video iframe").each(function(index){
+				var player = $f(this);
+				player.addEvent('ready', function() {
+				    player.addEvent('pause',  onPause);
+				    player.addEvent('finish',  onPause);
+				    player.addEvent('play', onPlay);
+				});
+			});
+			
+			function onPause(id) {
+				$slider.iosSlider('autoSlidePlay');
+			}
+			function onPlay(id) {
+				$slider.iosSlider('autoSlidePause');
+			}
 			
 	   })
 	})(jQuery);
@@ -518,7 +536,7 @@ function shortcode_media_slider_video( $atts, $content = null ) {
 			'videoid' => ''
 		), $atts ) );
    return '<div class="products_slider_images media_slider_video">'.
-			'<iframe src="//player.vimeo.com/video/'.esc_attr($videoid).'?title=0&amp;byline=0&amp;portrait=0&amp;color=05597a" width="600" height="338" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'.
+			'<iframe src="//player.vimeo.com/video/'.esc_attr($videoid).'?title=0&amp;byline=0&amp;portrait=0&amp;color=05597a&api=1&player_id=video-'.esc_attr($videoid).'" width="600" height="338" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen id="video-'.esc_attr($videoid).'"></iframe>'.
 			'</div>';
 }
 

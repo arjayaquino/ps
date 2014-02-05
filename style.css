@@ -1001,6 +1001,9 @@ form input[type=submit]:hover {
 	/*background:#f9f9f9;*/
 	padding:30px 0 0 0;
 }
+.wholesale-user .gbtr_light_footer_wrapper{
+	display:none;
+}
 
 .gbtr_light_footer_wrapper li {
 	/*margin:0 0 20px 0;/
@@ -1751,6 +1754,11 @@ ul.product_list_widget span.amount,
 	margin-bottom: 50px;
 	position: relative;
 }
+.wholesale-user .gbtr_header_wrapper {
+	height:34px;
+	margin-bottom:80px;
+}
+
 .home .gbtr_header_wrapper,
 .page-id-1514 .gbtr_header_wrapper,
 .page-template-page-full-php .gbtr_header_wrapper /* approach page */ {
@@ -1806,6 +1814,10 @@ ul.product_list_widget span.amount,
 	text-align:right;
 	float:right;
 	/*font-size:1px;*/
+}
+
+.wholesale-user .gbtr_tools_search {
+	display:none;
 }
 
 .gbtr_tools_search_inputtext {
@@ -1865,6 +1877,10 @@ ul.product_list_widget span.amount,
 	display:block;
 	width: 151px;
 	height: 150px;
+}
+
+.wholesale-user .gbtr_logo {
+	margin-top:-50px;
 }
 
 .menu_centered_style .gbtr_logo_wrapper_centered {
@@ -3144,6 +3160,14 @@ input.button,
     transition: opacity 0.2s ease-out;*/
 }
 
+a.button:focus,
+button.button:focus,
+input.button:focus,
+#respond input#submit:focus,
+#content input.button:focus {
+	outline:none;
+}
+
 a.button:disabled,
 button.button:disabled,
 input.button:disabled,
@@ -3309,6 +3333,10 @@ div.product .product_brand {
 	padding:0 0 5px 0;
 	font-weight:900;
 	display:block;
+}
+
+.wholesale-user .price{
+	display:none !important;
 }
 
 div.product .summary span.price,
@@ -3487,6 +3515,13 @@ div.product #content .quantity {
 	-moz-box-shadow: inset 0 0px 0 rgba(0,0,0,0.075), inset 0 0px 0 rgba(255,255,255,0.3), 0 0px 0px rgba(0,0,0,0.1) !important;
 	box-shadow: inset 0 0px 0 rgba(0,0,0,0.075), inset 0 0px 0 rgba(255,255,255,0.3), 0 0px 0px rgba(0,0,0,0.1) !important;
 	-webkit-appearance: none;
+}
+
+.quantity .plus:focus,
+.quantity .minus:focus,
+#content .quantity .plus:focus,
+#content .quantity .minus:focus{
+	outline:none;
 }
 
 .quantity .minus, #content .quantity .minus {
@@ -4512,11 +4547,6 @@ table.shop_table .product-thumbnail,
 	width:110px;
 }
 
-table.shop_table .product-name,
-.woocommerce table.shop_table .product-name {
-	padding:0 10px 0 0 !important;
-}
-
 table.shop_table .product-name .category,
 .woocommerce table.shop_table .product-name .category {
 	color: #b39964;
@@ -4526,12 +4556,6 @@ table.shop_table .product-name .category,
 	text-decoration:none;
 	padding:0 0 5px 0;
 	display:block;
-}
-
-table.shop_table .product-name a,
-.woocommerce table.shop_table .product-name a {
-	color: #000;
-	text-decoration:none;
 }
 
 table.shop_table .product-name .product-price,
@@ -4619,6 +4643,10 @@ td.product-name dl.variation dt,
 
 .shipping-calculator-form .button:hover {
 	background:#b39964 !important;
+}
+
+.gbtr_left_column_cart select#shipping_method {
+	max-width:128px;
 }
 
 /* Cart sidebar */
@@ -5072,7 +5100,7 @@ table.shop_table td.product-quantity,
 
 table.shop_table td.product-name,
 .woocommerce table.shop_table td.product-name {
-	/*padding:15px 20px 0 0 !important;*/
+	padding:15px 20px 10px 0 !important;
 }
 
 table.shop_table td.product-name .product_brand,
@@ -5136,6 +5164,11 @@ table.shop_table tfoot .shipping td,
 	font-weight:normal;
 	text-transform:none;
 	font-style:italic;
+}
+
+.wholesale-user table.shop_table tfoot,
+.wholesale-user table.shop_table .product-total {
+	display:none;
 }
 
 .gbtr_billing_address_content {
@@ -5408,6 +5441,11 @@ ul.order_details li strong {
 	font-size:16px;
 }
 
+.wholesale-user ul.order_details .total,
+.wholesale-user ul.order_details .method {
+	display:none;
+}
+
 /*/ ORDER RECEIVED */
 
 
@@ -5575,6 +5613,10 @@ table.my_account_orders .order-total {
 	width:15%;
 }
 
+.wholesale-user table.my_account_orders .order-total {
+	display:none !important;
+}
+
 table.my_account_orders td.order-total {
 	font-size:13px;
 	text-transform:uppercase;
@@ -5586,9 +5628,9 @@ table.my_account_orders td.order-actions {
 	white-space:nowrap;
 	color:#000;
 }
-
-table.my_account_orders td.order-actions a {
-	color:#000;
+.woocommerce table.my_account_orders .order-actions, 
+.woocommerce-page table.my_account_orders .order-actions {
+	text-align: left;
 }
 
 table.my_account_orders td.order-actions a:hover {
@@ -6424,6 +6466,10 @@ footer .sep {
 	background:#000;
 	padding:30px 0 0 0;
 	color:#fff;
+}
+
+.wholesale-user .gbtr_dark_footer_wrapper {
+	display:none;
 }
 
 .gbtr_dark_footer_wrapper label {
