@@ -19,7 +19,7 @@ if ( empty( $woocommerce_loop['loop'] ) )
 
 // Store column count for displaying the grid
 if ( empty( $woocommerce_loop['columns'] ) )
-	$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 4 );
+	$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 3 );
 
 // Ensure visibilty
 if ( ! $product->is_visible() )
@@ -44,24 +44,47 @@ $woocommerce_loop['loop']++;
             <div class="image_container">
                 <a href="<?php the_permalink(); ?>">
 
-                    <div class="loop_products_thumbnail_img_wrapper"><?php echo get_the_post_thumbnail( $post->ID, 'recent_posts_shortcode', 'shop_catalog') ?></div>
+                    <div class="loop_products_thumbnail_img_wrapper front"><?php echo get_the_post_thumbnail( $post->ID, 'custom_best_sellers_large', 'shop_catalog') ?></div>
                     
-					<div class="info-overlay">
-						<h4>Tasting Notes</h4>
-						<?php
-						$tastingNotes = explode(',', get_post_meta($post->ID, 'Tasting Notes', true));
+                    <?php if ( (!$theretailer_theme_options['flip_product']) || ($theretailer_theme_options['flip_product'] == 0) ) { ?>
+                    
+					<?php
 
-						foreach($tastingNotes as $tastingNote){
+						if ( $attachment_ids ) {
+					
+							$loop = 0;				
+							
+							foreach ( $attachment_ids as $attachment_id ) {
+					
+								$image_link = wp_get_attachment_url( $attachment_id );
+					
+								if ( ! $image_link )
+									continue;
+								
+								$loop++;
+								
+								printf( '<div class="loop_products_additional_img_wrapper back">%s</div>', wp_get_attachment_image( $attachment_id, 'custom_best_sellers_large', 'shop_catalog' ) );
+								
+								if ($loop == 1) break;
+							
+							}
+					
+						} else {
+						
 						?>
-							<span><?php echo $tastingNote; ?></span>
-						<?php } ?>	
-					</div>
-
+                        
+                        <div class="loop_products_additional_img_wrapper back"><?php echo get_the_post_thumbnail( $post->ID, 'custom_best_sellers_large', 'shop_catalog') ?></div>
+                        
+                        <?php
+							
+						}
+					?>
+                    
+                    <?php } ?>
+                    
                 </a>
                 <div class="clr"></div>
-				
                 <?php if ( (!$theretailer_theme_options['catalog_mode']) || ($theretailer_theme_options['catalog_mode'] == 0) ) { ?>
-				
                 <div class="product_button"><?php do_action( 'woocommerce_after_shop_loop_item' ); ?></div>
                 <?php } ?>
             </div>

@@ -355,9 +355,12 @@ ul.sf-menu li li li.sfHover ul {
 	cursor:pointer;
 	font-size:12px;
 	text-transform:uppercase;
-	font-weight:900;
 	line-height:1.3em;
-	text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
+	/*text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);*/
+}
+
+.sf-menu > li > a {
+	font-size:14px;
 }
 
 .sf-menu > li:first-child a {
@@ -385,7 +388,7 @@ ul.sf-menu li li li.sfHover ul {
 .sf-menu li li a {
 	text-transform:none;
 	font-weight:normal;
-	padding:10px 10px 10px 20px;
+	padding:10px 10px 10px 20px !important;
 	color:#000;
 	text-shadow: none;
 }
@@ -1001,6 +1004,8 @@ form input[type=submit]:hover {
 	/*background:#f9f9f9;*/
 	padding:30px 0 0 0;
 }
+
+.home .gbtr_light_footer_wrapper,
 .wholesale-user .gbtr_light_footer_wrapper{
 	display:none;
 }
@@ -1133,7 +1138,7 @@ form input[type=submit]:hover {
 	background:#000;
 	color:#fff;
 	font-size:12px;
-	font-weight:900;
+	font-weight:700;
 	text-transform:uppercase;
 	cursor:pointer;
 }
@@ -1754,10 +1759,6 @@ ul.product_list_widget span.amount,
 	margin-bottom: 50px;
 	position: relative;
 }
-.wholesale-user .gbtr_header_wrapper {
-	height:34px;
-	margin-bottom:80px;
-}
 
 .home .gbtr_header_wrapper,
 .page-id-1514 .gbtr_header_wrapper,
@@ -1877,10 +1878,6 @@ ul.product_list_widget span.amount,
 	display:block;
 	width: 151px;
 	height: 150px;
-}
-
-.wholesale-user .gbtr_logo {
-	margin-top:-50px;
 }
 
 .menu_centered_style .gbtr_logo_wrapper_centered {
@@ -2042,7 +2039,7 @@ ul.product_list_widget span.amount,
 
 .gbtr_little_shopping_bag_wrapper {
 	position:absolute;
-	top:0px;
+	top:5px;
 	right:10px;
 	width:140px;
 	z-index:100;
@@ -2369,18 +2366,18 @@ ul.cart_list .empty:before {
 
 .gbtr_little_shopping_bag_wrapper.shopping_bag_mobile_style
 {
-	width:61px;
+	width:47px;
 	background: none;
 	background-image: url(images/sprites.png);
-	background-position: -744px -95px;
+	background-position: -602px -100px;
 	background-repeat: no-repeat;
 	background-color: #fff;
 }
 
 .gbtr_little_shopping_bag_wrapper.shopping_bag_mobile_style .gbtr_little_shopping_bag
 {
-	width:41px;
-	height:47px;
+	width:27px;
+	height:33px;
 	background: none;
 }
 
@@ -2960,8 +2957,20 @@ span.onsale,
 	position:relative;
 	width:190px;
 	max-height:243px;
-	/*overflow:hidden;*/
+	overflow:hidden;
 }
+
+.featured-large .product_item {
+	margin-right: 20px !important;
+	width: 300px;
+}
+
+.featured-large .product_item .image_container {
+	height:300px;
+	max-height: none;
+	width: 300px;
+}
+
 .custom_best_sellers .product_item,
 .custom_best_sellers .product_item .image_container {
 	width: 280px;
@@ -2988,9 +2997,9 @@ span.onsale,
 
 .product_item h3 a {
 	font-size:12px;
+	font-family: 'Gotham A', 'Gotham B'; font-weight: 500; font-style: normal;
 	color:#b39964;
 	text-transform:uppercase;
-	font-weight:900;
 	padding:8px 0 0 0;
 	display:block;
 }
@@ -3006,6 +3015,7 @@ span.onsale,
 .product_item p a {
 	color:#000;
 	display:inline-block;
+	font-family: 'Gotham A', 'Gotham B'; font-weight: 400; font-style: normal;
 	padding:10px 0 5px 0;
 }
 
@@ -3015,14 +3025,15 @@ span.onsale,
 
 .product_item .price {
 	font-size:18px;
+	font-family: 'Gotham A', 'Gotham B'; font-weight: 400; font-style: normal;
 	color:#000 !important;
 	padding:0 !important;
-	font-weight:bold;
 }
 
 .product_item .price del .amount,
 .product_item .price .from {
 	font-size:13px;
+	font-family: 'Gotham A', 'Gotham B'; font-weight: 400; font-style: normal;
 	color:#555 !important;
 	padding:0 !important;
 	font-weight:normal;
@@ -3056,11 +3067,11 @@ span.onsale,
 }
 
 .product_item .info-overlay{
-	background-color:orange;
+	background-color:#ff6a00;
 	bottom:0;
 	color:#ffffff;
 	display:none;
-	height:75%;
+	height:54%;
 	left:0;
 	padding: 10px;
 	position:absolute;
@@ -3074,11 +3085,17 @@ span.onsale,
 .product_item .info-overlay h4{
 	border-bottom:1px solid #ffffff;
 	color:#ffffff;
+	display:inline-block;
+	font-size:12px;
+	font-weight:700;
+	padding-bottom:1px;
+	margin-bottom:3px;
+	text-transform:uppercase;
 }
 .product_item .info-overlay span{
 	display:block;
 	font-size:14px;
-	padding:3px 0px;
+	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B'; font-weight: 400; font-style: normal;
 }
 
 #respond {
@@ -3335,7 +3352,7 @@ div.product .product_brand {
 	display:block;
 }
 
-.wholesale-user .price{
+.wholesale-user.hide-price .price{
 	display:none !important;
 }
 
@@ -5166,8 +5183,8 @@ table.shop_table tfoot .shipping td,
 	font-style:italic;
 }
 
-.wholesale-user table.shop_table tfoot,
-.wholesale-user table.shop_table .product-total {
+.wholesale-user.hide-price table.shop_table tfoot,
+.wholesale-user.hide-price table.shop_table .product-total {
 	display:none;
 }
 
@@ -5441,7 +5458,7 @@ ul.order_details li strong {
 	font-size:16px;
 }
 
-.wholesale-user ul.order_details .total,
+.wholesale-user.hide-price ul.order_details .total,
 .wholesale-user ul.order_details .method {
 	display:none;
 }
@@ -5613,7 +5630,7 @@ table.my_account_orders .order-total {
 	width:15%;
 }
 
-.wholesale-user table.my_account_orders .order-total {
+.wholesale-user.hide-price table.my_account_orders .order-total {
 	display:none !important;
 }
 
@@ -7120,13 +7137,13 @@ footer .sep {
 	margin-bottom:30px;
 	clear:both;
 	position:relative;
-	height: 285px;
+	height: 265px;
 	text-align: center;
 }
 .shortcode_banner_full_width_package {
 	float:right;
 	width: 30%;
-	margin-top: 18px;
+	margin-top: 0;
 }
 .shortcode_banner_full_width_inside {
 	margin: 0 auto;
@@ -7134,7 +7151,7 @@ footer .sep {
 }
 .shortcode_banner_full_width_text {
 	padding:20px;
-	margin-top: 41px;
+	margin-top: 21px;
 	text-align:center;
 	float:left;
 	transition: all 0.2s linear;
@@ -7153,8 +7170,9 @@ footer .sep {
 	padding:0;
 	margin:0;
 	text-transform:uppercase;
-	font-weight:900;
+	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B'; font-weight: 800; font-style: normal;
 	font-size: 79px;
+	margin-bottom: -15px;
 }
 
 .shortcode_banner_full_width_inside h3 strong {
@@ -7170,7 +7188,7 @@ footer .sep {
 	margin:0;
 	text-transform:uppercase;
 	font-size:43px;
-	font-weight:900;
+	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B'; font-weight: 800; font-style: normal;
 }
 
 .shortcode_banner_full_width_inside h4 a {
@@ -7882,8 +7900,9 @@ p.product a:hover {
 
 /*style_2*/
 .custom_images_slider {
-	height: 520px;
-	margin-bottom: 20px;
+	height: 416px;
+	min-height:50px;
+	margin-bottom: 48px;
 }
 
 .style_2 .products_slider_item  {	
@@ -7900,12 +7919,12 @@ p.product a:hover {
 .style_2 .products_slider_images {
 	/*width:450px;*/
 	background:#fff;
-	height: 510px;
+	height: 416px;
 }
 
 .style_2 .products_slider_images img {
 	width:auto;
-	height:510px;
+	height:416px;
 }
 .custom_images_slider .style_2 .products_slider_images {
 	background-color: transparent;
@@ -7916,7 +7935,8 @@ p.product a:hover {
 	background:transparent url("images/bg-black-50.png") repeat left top;
 	color:#ffffff;
 	display:block;
-	font-size:30px;
+	font-size:35px;
+	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B'; font-weight: 800; font-style: normal;
 	height:100%;
 	left:0;
 	padding:300px 20px 20px 20px;
@@ -7934,8 +7954,8 @@ p.product a:hover {
 
 .products_slider_images.media_slider_video{
 	background-color:#000000 !important;
-	min-width:600px;
-	padding-top:90px;
+	min-width:738px;
+	padding-top:0;
 	
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -8756,6 +8776,10 @@ div.wpcf7-response-output {
 	width:960px;
 	margin:0 auto;
 	padding:0 0 0 20px;
+}
+
+.shortcode_container > br{
+	display:none;
 }
 
 /*.home .shortcode_container {
@@ -10355,6 +10379,7 @@ list-style-type: none !important;
 		left: 10px;
 		margin-left: 10px;
 	}
+	
 	.menu_under_style .menus_wrapper {
 		border:0;
 		margin:0 !important;
@@ -10758,6 +10783,17 @@ list-style-type: none !important;
 	.shortcode_banner_full_width {
 		display:none;
 	}
+	
+	.gbtr_tools_account ul li {
+		padding: 0 4px;
+	}
+	
+	.gbtr_tools_search {
+		display:none;
+	}
+}
+
+@media only screen and (max-width: 634px) {
 	
 	.gbtr_logo{
 		height:100px;

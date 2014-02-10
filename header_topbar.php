@@ -1,7 +1,5 @@
 <div class="gbtr_tools_wrapper">
     <div class="container_12">
-        <div class="grid_5">&nbsp;</div>
-        <div class="grid_7">
             <div class="gbtr_tools_search">
                 <form method="get" action="<?php echo home_url(); ?>">
                     <input class="gbtr_tools_search_inputtext" type="text" value="<?php echo esc_html($s, 1); ?>" name="s" id="s" />
@@ -38,7 +36,6 @@
                         Define your top bar navigation.
                     <?php endif; ?>
                 </ul>
-            </div>               
-        </div>
+            </div>      
     </div>
 </div>

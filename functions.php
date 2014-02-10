@@ -23,9 +23,17 @@ function theretailer_secondary_styles()
 	
 	wp_enqueue_style( 'prettyphoto' );	
 	
+	wp_register_script('jquery-placeholder', get_stylesheet_directory_uri() . '/js/plugins/placeholders.jquery.min.js', 'jquery', '3.0.2', TRUE);
+	wp_enqueue_script('jquery-placeholder');
 }  
 add_action( 'wp_enqueue_scripts', 'theretailer_secondary_styles', 99 );
 
+
+/******************************************************/
+/**************** CUSTOM IMAGE SIZES ******************/
+/******************************************************/
+add_image_size('small_product_image', 114, 114, true);
+add_image_size('custom_best_sellers_large', 300, 300, true);
 
 
 /**********************************************/
@@ -536,7 +544,7 @@ function shortcode_media_slider_video( $atts, $content = null ) {
 			'videoid' => ''
 		), $atts ) );
    return '<div class="products_slider_images media_slider_video">'.
-			'<iframe src="//player.vimeo.com/video/'.esc_attr($videoid).'?title=0&amp;byline=0&amp;portrait=0&amp;color=05597a&api=1&player_id=video-'.esc_attr($videoid).'" width="600" height="338" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen id="video-'.esc_attr($videoid).'"></iframe>'.
+			'<iframe src="//player.vimeo.com/video/'.esc_attr($videoid).'?title=0&amp;byline=0&amp;portrait=0&amp;color=05597a&api=1&player_id=video-'.esc_attr($videoid).'" width="738" height="416" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen id="video-'.esc_attr($videoid).'"></iframe>'.
 			'</div>';
 }
 
@@ -591,13 +599,22 @@ function shortcode_custom_featured_by_category($atts, $content = null) {
 			}
 			
 			//show the info overlay
-			$slider.find('.product_item').on({
-				mouseenter: function(e){
-					$(this).find('.info-overlay').fadeIn(500);
-				},
-				mouseleave: function(e){
-					$(this).find('.info-overlay').fadeOut(500);
-				}
+			$slider.find('.product_item').each(function(){
+				var $productItem = $(this);
+				var $infoOverlay = $productItem.find('.info-overlay');
+				var boxHeight = $productItem.find(".image_container").height();
+				var startY = boxHeight - $infoOverlay.outerHeight();
+				console.log($infoOverlay.data("startY"));
+				$infoOverlay.css("top", boxHeight + "px");
+				
+				$productItem.on({
+					mouseenter: function(e){
+						$infoOverlay.show().stop().animate({top:startY}, 250);
+					},
+					mouseleave: function(e){
+						$infoOverlay.stop().animate({top:boxHeight}, 250);
+					}
+				});
 			});
 			
 			function custom_featured_products_UpdateSliderHeight(args) {
@@ -647,7 +664,7 @@ function shortcode_custom_featured_by_category($atts, $content = null) {
         <div class="gbtr_bold_sep"></div>   
     
         <div class="gbtr_items_slider_wrapper">
-            <div class="gbtr_items_slider featured_coffees">
+            <div class="gbtr_items_slider <?php if(esc_attr($category) == 'coffee') {echo 'featured_coffees';} ?>">
                 <ul class="slider">
                     <?php
             
@@ -673,10 +690,143 @@ function shortcode_custom_featured_by_category($atts, $content = null) {
 								//coffee categorie gets something special
 								if(esc_attr($category) == 'coffee'){
 									woocommerce_get_template_part( 'content', 'coffee-product' );
-								} else {
+								}else {
 									woocommerce_get_template_part( 'content', 'product' );
 								}
 							?>
+                
+                        <?php endwhile; // end of the loop. ?>
+                        
+                    <?php
+                    
+                    endif; 
+                    //wp_reset_query();
+                    
+                    ?>
+                </ul>     
+            </div>
+        </div>
+    
+    </div>
+    
+    <?php } ?>
+
+	<?php
+	$content = ob_get_contents();
+	ob_end_clean();
+	return $content;
+}
+
+
+// [custom_best_sellers_large]
+function shortcode_custom_best_sellers_large($atts, $content = null) {
+	$sliderrandomid = rand();
+	extract(shortcode_atts(array(
+		"title" => '',
+		'per_page'  => '12',
+        'orderby' => 'date',
+        'order' => 'desc'
+	), $atts));
+	ob_start();
+	?>
+    
+    <?php 
+	/**
+	* Check if WooCommerce is active
+	**/
+	if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+	?>
+    
+    <script>
+	(function($){
+		$(window).load(function(){
+		
+			/* items_slider */
+			$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
+				snapToChildren: true,
+				desktopClickDrag: true,
+				scrollbar: true,
+				scrollbarHide: true,
+				scrollbarLocation: 'bottom',
+				scrollbarHeight: '2px',
+				scrollbarBackground: '#ccc',
+				scrollbarBorder: '0',
+				scrollbarMargin: '0',
+				scrollbarOpacity: '1',
+				navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_right'),
+				navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_left'),
+				onSliderLoaded: custom_best_sellers_UpdateSliderHeight,
+				//onSlideChange: custom_best_sellers_UpdateSliderHeight,
+				//onSliderResize: custom_best_sellers_UpdateSliderHeight
+			});
+			
+			function custom_best_sellers_UpdateSliderHeight(args) {
+									
+				//currentSlide = args.currentSlideNumber;
+				
+				/* update height of the first slider */
+				
+				var t = 0; // the height of the highest element (after the function runs)
+				var t_elem;  // the highest element (after the function runs)
+				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .product_item').each(function () {
+					$this = $(this);
+					if ( $this.outerHeight() > t ) {
+						t_elem = this;
+						t = $this.outerHeight();
+					}
+				});
+	
+				setTimeout(function() {
+					//var setHeight = $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider .product_item:eq(' + (args.currentSlideNumber-1) + ')').outerHeight(true);
+					//$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').animate({ height: setHeight+20 }, 300);
+					$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').css({
+						height: t+30,
+						visibility: "visible"
+					});
+				},300);
+				
+			}
+			
+		})
+	})(jQuery);
+	</script>
+    
+    <div class="gbtr_items_slider_id_<?php echo $sliderrandomid ?>">
+    
+        <div class="gbtr_items_sliders_header">
+            <div class="gbtr_items_sliders_title">
+                <div class="gbtr_featured_section_title"><strong><?php echo $title ?></strong></div>
+            </div>
+            <div class="gbtr_items_sliders_nav">                        
+                <a class='big_arrow_right'></a>
+                <a class='big_arrow_left'></a>
+                <div class='clr'></div>
+            </div>
+        </div>
+    
+        <div class="gbtr_bold_sep"></div>   
+    
+        <div class="gbtr_items_slider_wrapper">
+            <div class="gbtr_items_slider featured-large">
+                <ul class="slider">
+                    <?php
+            
+                    $args = array(
+                        'post_type' => 'product',
+						'post_status' => 'publish',
+						'ignore_sticky_posts'   => 1,
+						'posts_per_page' => $per_page,
+						'meta_key' 		=> 'total_sales',
+    					'orderby' 		=> 'meta_value'
+                    );
+                    
+                    $products = new WP_Query( $args );
+                    
+                    if ( $products->have_posts() ) : ?>
+                                
+                        <?php while ( $products->have_posts() ) : $products->the_post(); ?>
+                    
+                            <?php woocommerce_get_template_part( 'content', 'large-product' ); ?>
                 
                         <?php endwhile; // end of the loop. ?>
                         
@@ -767,6 +917,7 @@ add_shortcode("media_slider_image", "shortcode_media_slider_image");
 add_shortcode("media_slider_video", "shortcode_media_slider_video");
 add_shortcode("custom_featured_by_category", "shortcode_custom_featured_by_category");
 add_shortcode("wholesale_category_listing", "shortcode_wholesale_category_listing");
+add_shortcode("custom_best_sellers_large", "shortcode_custom_best_sellers_large");
 
 
 /**********************************************/

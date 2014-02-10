@@ -5,6 +5,7 @@
 		var $wholesaleCatContainer = $wholesaleContent.find("#wholesale-category-container");
 		var $placeOrderButton = $wholesaleContent.find("button#placeorder");
 		var isFormSubmitting = false;
+		var isNeedToShowQuantity = false;
 		var currFormIndex = 0;
 		var formsToSubmit = [];
 		
@@ -12,10 +13,13 @@
 		function init(){
 			setTimeout(function(){
 				//$wholesaleCatContainer.find(".single_add_to_cart_button").addClass("add_to_cart_button product_type_simple");
-				$wholesaleCatContainer.find("input[name='quantity']").attr("value", "0")
+				isNeedToShowQuantity = true;
+				$wholesaleCatContainer.find("input[name='quantity']").attr("value", "0").trigger("change");
+				$wholesaleCatContainer.find(".variations_form .single_variation_wrap").trigger("show_variation");
 			}, 500);
 			initCategorySelection();
 			initPlaceOrder();
+			initTotalPriceCalculation();
 		}
 		init();
 		
@@ -41,6 +45,93 @@
 				})
 			});
 		}
+		
+		
+		
+	/**
+	 *                            TOTAL CALCULATION
+	 * ----------------------------------------
+	 */
+		
+		function initTotalPriceCalculation(){
+			if($("#global_wrapper").hasClass("hide-price")){
+				return;
+			}
+			
+			$wholesaleCatContainer.find(".quantity input[name='quantity']").each(function(index){
+				var $quantityInput = $(this);
+				var $parent = $quantityInput.parents(".wholesale-product");
+				var $productTotal = $parent.find(".product-total");
+				
+				$quantityInput.on("change", function(e){
+					var amount = getAmountForQuantityClick($quantityInput, $parent);
+					var total = getTotal(amount,$quantityInput.val());
+					
+					showTotal($productTotal, total);
+				});
+			});
+			
+			//variation select change
+			$wholesaleCatContainer.find(".variations_form").each(function(index){
+				var $variationsForm = $(this);
+				var $parent = $variationsForm.parents(".wholesale-product");
+				var $productTotal = $parent.find(".product-total");
+		        var $singleVariationWrap = $variationsForm.find('.single_variation_wrap');
+				var productVariations = $variationsForm.data("product_variations");
+				
+				$singleVariationWrap.on("show_variation", function(e){
+					var $quantityInput = $singleVariationWrap.find("input[name='quantity']");
+					var $select = $variationsForm.find(".variations select");
+					var amount = getAmountForVariationChange(productVariations, $select[0].selectedIndex);
+					
+					if(amount != null){
+						var total = getTotal(amount, $quantityInput.val());
+						showTotal($productTotal, total);
+					}
+				});
+			});
+		}
+		
+		function showTotal($productTotal, total){
+			$productTotal.find("span").text("$"+total);
+			if(isNeedToShowQuantity && !$productTotal.is(":visible")){
+				$productTotal.show();
+			}
+		}
+		
+		function getAmountForQuantityClick($quantityInput, $parent){
+			var $amountText;
+			//use variation amount
+			if($quantityInput.parents(".variations_button").length > 0){
+				$amountText = $parent.find(".product-actions .amount");
+			} else {
+				$amountText = $parent.find(".product-info .amount");
+			}
+			return $amountText.text().replace("$", "");
+		}
+		
+		function getAmountForVariationChange(productVariations, selectedIndex){
+			var amount = null;
+			for(var i=0; i<productVariations.length; i++){
+				var variation = productVariations[i];
+				if(selectedIndex == (i+1)){
+					var $amountHtml = $(variation.price_html).find(".amount");
+					amount = $amountHtml.text().replace("$", "");
+				}
+			}
+			return amount;
+		}
+		
+		function getTotal(amount, quantity){
+			var total = parseFloat(amount * quantity);
+			return total.toFixed(2);
+		}
+		
+		
+	/**
+	 *                            PLACING ORDER
+	 * ----------------------------------------
+	 */
 		
 		function initPlaceOrder(){
 			$placeOrderButton.on("click", function(e){

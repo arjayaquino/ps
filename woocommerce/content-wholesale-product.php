@@ -32,6 +32,9 @@ $woocommerce_loop['loop']++;
 		<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
 
         <li class="wholesale-product cf">
+			<div class="product-image">
+				<?php echo get_the_post_thumbnail( $post->ID, 'small_product_image', 'shop_catalog') ?>
+			</div>
             <div class="product-info bbs">
                 <p><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
 	            <?php
@@ -45,5 +48,9 @@ $woocommerce_loop['loop']++;
 			<div class="product-actions bbs">
 				<?php do_action( 'woocommerce_' . $product->product_type . '_add_to_cart'  ); ?>
 				
+			</div>
+			
+			<div class="product-total bbs">
+				<span>$0.00</span>
 			</div>
         </li>

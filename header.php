@@ -13,7 +13,7 @@ global $theretailer_theme_options;
 <meta charset="<?php bloginfo('charset'); ?>" />
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
 
-<title><?php wp_title( '|', true, 'right' ); ?></title>
+<title><?php wp_title( ' ', true, 'right' ); ?></title>
 
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
@@ -51,20 +51,24 @@ global $theretailer_theme_options;
 <!-- *********************** wholesale ******************************** -->
 	<link rel="stylesheet" type="text/css" href="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/wholesale.css" />
 	<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/wholesaleorders.js"></script>
-<?php } ?>
+<?php } ?>	
+
+<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/ps.js"></script>
 
 <?php
 $isWholesaleCustomer = current_user_can("order_wholesale");
 $isWholesaleCafeCustomer = current_user_can("order_wholesale_cafe");
 $isShowPrice = (!$isWholesaleCustomer) || ($isWholesaleCustomer && $isWholesaleCafeCustomer);  //only show totals for regular or cafe wholesale customers
+
+$wsHtmlClass = "";
+if($isWholesaleCustomer){
+	$wsHtmlClass = "wholesale-user";
+} 
+if($isWholesaleCustomer && !$isShowPrice){
+	$wsHtmlClass = "wholesale-user hide-price";
+}
+
 ?>
-
-<?php
-global $post;
-if(has_shortcode( $post->post_content, 'media_slider') ) { ?>
-	<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/froogaloop.js"></script>
-<?php } ?>
-
 
 </head>
 
@@ -74,7 +78,7 @@ if(has_shortcode( $post->post_content, 'media_slider') ) { ?>
 
 <body id="ps-store" <?php body_class(); ?>>
     
-    <div id="global_wrapper" <?php if(!$isShowPrice) { echo 'class="wholesale-user"'; } ?> >
+    <div id="global_wrapper" class="<?php echo $wsHtmlClass; ?>" >
 
         <div class="gbtr_header_wrapper">
             <?php if ( (!$theretailer_theme_options['hide_topbar']) || ($theretailer_theme_options['hide_topbar'] == 0) ) { ?>
