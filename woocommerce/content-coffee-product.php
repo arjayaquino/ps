@@ -46,7 +46,10 @@ $woocommerce_loop['loop']++;
 
                     <div class="loop_products_thumbnail_img_wrapper"><?php echo get_the_post_thumbnail( $post->ID, 'recent_posts_shortcode', 'shop_catalog') ?></div>
                     
-					<div class="info-overlay">
+					<?php
+					$bgColor = get_post_meta($post->ID, 'Tasting Notes Color', true);
+					?>
+					<div class="info-overlay" style="background-color:<?php echo $bgColor; ?>">
 						<h4>Tasting Notes</h4>
 						<?php
 						$tastingNotes = explode(',', get_post_meta($post->ID, 'Tasting Notes', true));

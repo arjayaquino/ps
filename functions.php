@@ -718,8 +718,8 @@ function shortcode_custom_featured_by_category($atts, $content = null) {
 }
 
 
-// [custom_best_sellers_large]
-function shortcode_custom_best_sellers_large($atts, $content = null) {
+// [custom_featured_products_large]
+function shortcode_custom_featured_products_large($atts, $content = null) {
 	$sliderrandomid = rand();
 	extract(shortcode_atts(array(
 		"title" => '',
@@ -812,12 +812,14 @@ function shortcode_custom_best_sellers_large($atts, $content = null) {
                     <?php
             
                     $args = array(
+                        'post_status' => 'publish',
                         'post_type' => 'product',
-						'post_status' => 'publish',
 						'ignore_sticky_posts'   => 1,
-						'posts_per_page' => $per_page,
-						'meta_key' 		=> 'total_sales',
-    					'orderby' 		=> 'meta_value'
+                        'meta_key' => '_featured',
+                        'meta_value' => 'yes',
+                        'posts_per_page' => $per_page,
+						'orderby' => $orderby,
+						'order' => $order,
                     );
                     
                     $products = new WP_Query( $args );
@@ -909,6 +911,166 @@ function shortcode_wholesale_category_listing($atts, $content = null) {
 }
 
 
+// [from_the_blog_ps]
+function shortcode_from_the_blog_ps($atts, $content = null) {
+	$sliderrandomid = rand();
+	extract(shortcode_atts(array(
+		"title" => '',
+		"posts" => '2',
+		"category" => ''
+	), $atts));
+	ob_start();
+	?> 
+    
+    <script>
+	(function($){
+		$(window).load(function(){
+			/* items_slider */
+			$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
+				snapToChildren: true,
+				desktopClickDrag: true,
+				scrollbar: true,
+				scrollbarHide: true,
+				scrollbarLocation: 'bottom',
+				scrollbarHeight: '2px',
+				scrollbarBackground: '#ccc',
+				scrollbarBorder: '0',
+				scrollbarMargin: '0',
+				scrollbarOpacity: '1',
+				navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_right'),
+				navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_left'),
+				onSliderLoaded: gbtr_items_slider_UpdateSliderHeight,
+			});
+		
+			function gbtr_items_slider_UpdateSliderHeight(args) {
+			
+				/* update height of the first slider */
+			
+				var t = 0; // the height of the highest element (after the function runs)
+				var t_elem;  // the highest element (after the function runs)
+				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .from_the_blog_item').each(function () {
+					$this = $(this);
+					if ( $this.outerHeight() > t ) {
+						t_elem = this;
+						t = $this.outerHeight();
+					}
+				});
+
+				setTimeout(function() {
+					$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').css({
+						height: t+30,
+						visibility: "visible"
+					});
+				});
+			
+			}
+		});
+	})(jQuery);
+	</script>
+    
+    <div class="gbtr_items_slider_id_<?php echo $sliderrandomid ?>">
+    
+        <div class="gbtr_items_sliders_header">
+            <div class="gbtr_items_sliders_title">
+                <div class="gbtr_featured_section_title"><strong><?php echo $title ?></strong></div>
+            </div>
+            <div class="gbtr_items_sliders_nav">                        
+                <a class='big_arrow_right'></a>
+                <a class='big_arrow_left'></a>
+                <div class='clr'></div>
+            </div>
+        </div>
+    
+        <div class="gbtr_bold_sep"></div>   
+    
+        <div class="gbtr_items_slider_wrapper">
+            <div class="gbtr_items_slider from_the_blog">
+                <ul class="slider">
+					
+					<?php
+            
+                    $args = array(
+                        'post_status' => 'publish',
+                        'post_type' => 'post',
+						'category_name' => $category,
+                        'posts_per_page' => $posts
+                    );
+                    
+                    $recentPosts = new WP_Query( $args );
+                    
+                    if ( $recentPosts->have_posts() ) : ?>
+                                
+                        <?php while ( $recentPosts->have_posts() ) : $recentPosts->the_post(); ?>
+                    
+                            <?php $post_format = get_post_format(get_the_ID()); ?>
+                            
+                            <li class="from_the_blog_item <?php echo $post_format; ?> <?php if ( !has_post_thumbnail()) : ?>no_thumb<?php endif; ?>">
+                                
+                                <a class="from_the_blog_img" href="<?php the_permalink() ?>">
+                                    <?php if ( has_post_thumbnail()) : ?>
+                                    	<?php the_post_thumbnail('recent_posts_shortcode') ?>
+                                    <?php else : ?>
+                                    	<span class="from_the_blog_noimg"></span>
+                                    <?php endif; ?>
+                                    <span class="from_the_blog_date">
+										<span class="from_the_blog_date_day"><?php echo get_the_time('d', get_the_ID()); ?></span>
+                                        <span class="from_the_blog_date_month"><?php echo get_the_time('M', get_the_ID()); ?></span>
+                                    </span>
+                                    <?php if ($post_format != "") : ?>
+                                    <span class="post_format_icon"></span>
+                                    <?php endif ?>
+                                </a>
+                                
+                                <div class="from_the_blog_content">
+                                
+                                    <?php if ( ($post_format == "") || ($post_format == "video") ) : ?>
+                                    	<a class="from_the_blog_title" href="<?php the_permalink() ?>"><h3><?php echo string_limit_words(get_the_title(), 5); ?></h3></a>
+                                    <?php endif ?>	
+                                    
+                                    <?php if ( ($post_format == "") || ($post_format == "quote") || ($post_format == "video") || ($post_format == "image") || ($post_format == "audio") || ($post_format == "gallery") ) : ?>
+                                    	<div class="from_the_blog_comments">
+											<?php comments_popup_link( __( 'Leave a comment', 'theretailer' ), __( '1 Comment', 'theretailer' ), __( '% Comments', 'theretailer' ), '', '' ); ?>
+                                        </div>
+                                    <?php endif ?>
+                            
+                                    <div class="from_the_blog_excerpt">
+										<?php											
+											$limit_words = 12;
+											if ( ($post_format == "status") || ($post_format == "quote") || ($post_format == "aside") ) {
+												$limit_words = 40;
+											}
+											$excerpt = get_the_excerpt();
+											$link = get_permalink(get_the_ID());
+											$readmore = ' <a class="from_the_blog_readmore" href="'.$link.'">Read more</a>';
+                                            echo string_limit_words($excerpt, $limit_words).$readmore;
+                                        ?>
+                                    </div>
+
+                                </div>
+                                
+                            </li>
+                
+                        <?php endwhile; // end of the loop. ?>
+                        
+                    <?php
+
+                    endif;
+					//wp_reset_query();
+                    
+                    ?>
+                </ul>     
+            </div>
+        </div>
+    
+    </div>
+
+	<?php
+	$content = ob_get_contents();
+	ob_end_clean();
+	return $content;
+}
+
+
 add_shortcode('banner_full_width', 'banner_full_width');
 add_shortcode('wood_plank_triplet', 'wood_plank_triplet');
 add_shortcode("custom_images_slider", "shortcode_custom_images_slider");
@@ -917,8 +1079,8 @@ add_shortcode("media_slider_image", "shortcode_media_slider_image");
 add_shortcode("media_slider_video", "shortcode_media_slider_video");
 add_shortcode("custom_featured_by_category", "shortcode_custom_featured_by_category");
 add_shortcode("wholesale_category_listing", "shortcode_wholesale_category_listing");
-add_shortcode("custom_best_sellers_large", "shortcode_custom_best_sellers_large");
-
+add_shortcode("custom_featured_products_large", "shortcode_custom_featured_products_large");
+add_shortcode("from_the_blog_ps", "shortcode_from_the_blog_ps");
 
 /**********************************************/
 /************ Plugin recommendations **********/

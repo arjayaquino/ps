@@ -359,6 +359,10 @@ ul.sf-menu li li li.sfHover ul {
 	/*text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);*/
 }
 
+.menus_wrapper .sf-menu a {
+	font-family: 'Gotham A', 'Gotham B'; font-weight: 700; font-style: normal;
+}
+
 .sf-menu > li > a {
 	font-size:14px;
 }
@@ -2123,7 +2127,7 @@ ul.product_list_widget span.amount,
 .gbtr_minicart_wrapper {
 	width:300px;
 	position:absolute;
-	top:60px;
+	top:47px;
 	right:0px;
 	z-index:10000;
 	display:none;
@@ -2280,7 +2284,6 @@ ul.cart_list .remove {
 	text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
-	display:none;
 }
 
 .shopping_bag_centered_style ul.cart_list .remove:hover {
@@ -7170,8 +7173,8 @@ footer .sep {
 	padding:0;
 	margin:0;
 	text-transform:uppercase;
-	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B'; font-weight: 800; font-style: normal;
-	font-size: 79px;
+	font-family: 'Gotham SSm A', 'Gotham SSm B'; font-weight: 800; font-style: normal;
+	font-size: 78px;
 	margin-bottom: -15px;
 }
 
@@ -7187,8 +7190,8 @@ footer .sep {
 	padding:0;
 	margin:0;
 	text-transform:uppercase;
-	font-size:43px;
-	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B'; font-weight: 800; font-style: normal;
+	font-size:42px;
+	font-family: 'Gotham SSm A', 'Gotham SSm B'; font-weight: 800; font-style: normal;
 }
 
 .shortcode_banner_full_width_inside h4 a {
@@ -7936,7 +7939,7 @@ p.product a:hover {
 	color:#ffffff;
 	display:block;
 	font-size:35px;
-	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B'; font-weight: 800; font-style: normal;
+	font-family: 'Gotham SSm A', 'Gotham SSm B'; font-weight: 800; font-style: normal;
 	height:100%;
 	left:0;
 	padding:300px 20px 20px 20px;
