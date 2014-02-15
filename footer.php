@@ -5,7 +5,9 @@ global $woocommerce;
 
 <script type="text/javascript">// <![CDATA[
 jQuery(function($){
-	favicon.badge(<?php echo $woocommerce->cart->cart_contents_count; ?>);
+	<?php if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) : ?>
+		//favicon.badge(<?php echo $woocommerce->cart->cart_contents_count; ?>);
+	<?php endif; ?>
 });// ]]>
 </script>
     

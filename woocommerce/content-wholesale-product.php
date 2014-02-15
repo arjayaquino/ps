@@ -33,14 +33,14 @@ $woocommerce_loop['loop']++;
 
         <li class="wholesale-product cf">
 			<div class="product-image">
-				<?php echo get_the_post_thumbnail( $post->ID, 'small_product_image', 'shop_catalog') ?>
+				<a href="<?php the_permalink(); ?>"><?php echo get_the_post_thumbnail( $post->ID, 'small_product_image', 'shop_catalog') ?></a>
 			</div>
             <div class="product-info bbs">
                 <p><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>
 	            <?php
 					//show price only for cafe
 					if(current_user_can("order_wholesale_cafe")){
-			            do_action( 'woocommerce_after_shop_loop_item_title' );
+			            echo $product->get_price_html();
 					}
 	            ?>
             </div>

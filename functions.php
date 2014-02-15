@@ -325,6 +325,10 @@ function shortcode_custom_images_slider($atts, $content=null, $code) {
 				scrollbarBorder: '0',
 				scrollbarMargin: '0',
 				scrollbarOpacity: '1',
+				autoSlide: true,
+				autoSlideTimer: 4000,
+				autoSlideHoverPause: true,
+				infiniteSlider:true,
 				navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_next'),
 				navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_previous'),
 				onSliderLoaded: update_height_products_slider,
@@ -533,7 +537,7 @@ function shortcode_media_slider_image( $atts, $content = null ) {
 		), $atts ) );
    return '<div class="products_slider_images media_slider_image">'.
 			'<a href="'.esc_attr($url).'">'.
-			'<span>'.$content.'</span><img src="'.esc_attr($src).'"/>'.
+			'<span class="text-box"><span>'.$content.'</span></span><img src="'.esc_attr($src).'"/>'.
 			'</a>'.
 			'</div>';
 }
@@ -871,7 +875,7 @@ function shortcode_wholesale_category_listing($atts, $content = null) {
 	if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	?>
 		<div id="cat-<?php echo esc_attr($category); ?>" class="wholesale-category">
-			<h4 class="wholesale-category-title widget-title"><?php echo esc_attr($title); ?></h4>
+			<!--<h4 class="wholesale-category-title widget-title"><?php echo esc_attr($title); ?></h4>-->
 			<ul>
 				<?php
 			    $args = array(
@@ -1024,25 +1028,23 @@ function shortcode_from_the_blog_ps($atts, $content = null) {
                                 <div class="from_the_blog_content">
                                 
                                     <?php if ( ($post_format == "") || ($post_format == "video") ) : ?>
-                                    	<a class="from_the_blog_title" href="<?php the_permalink() ?>"><h3><?php echo string_limit_words(get_the_title(), 5); ?></h3></a>
+                                    	<a class="from_the_blog_title" href="<?php the_permalink() ?>"><h3><?php echo get_the_title(); ?></h3></a>
                                     <?php endif ?>	
-                                    
-                                    <?php if ( ($post_format == "") || ($post_format == "quote") || ($post_format == "video") || ($post_format == "image") || ($post_format == "audio") || ($post_format == "gallery") ) : ?>
-                                    	<div class="from_the_blog_comments">
-											<?php comments_popup_link( __( 'Leave a comment', 'theretailer' ), __( '1 Comment', 'theretailer' ), __( '% Comments', 'theretailer' ), '', '' ); ?>
-                                        </div>
-                                    <?php endif ?>
-                            
+
                                     <div class="from_the_blog_excerpt">
 										<?php											
-											$limit_words = 12;
+											$limit_words = 20;
 											if ( ($post_format == "status") || ($post_format == "quote") || ($post_format == "aside") ) {
 												$limit_words = 40;
 											}
-											$excerpt = get_the_excerpt();
+											$content = get_the_excerpt();
+											$customExcerpt = get_post_meta(get_the_ID(), "Custom Excerpt", true);
+											if($customExcerpt != ""){
+												$content = $customExcerpt;
+											}
 											$link = get_permalink(get_the_ID());
 											$readmore = ' <a class="from_the_blog_readmore" href="'.$link.'">Read more</a>';
-                                            echo string_limit_words($excerpt, $limit_words).$readmore;
+                                            echo string_limit_words($content, $limit_words).$readmore;
                                         ?>
                                     </div>
 

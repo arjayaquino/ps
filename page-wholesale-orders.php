@@ -61,8 +61,12 @@ $checkout_url = $woocommerce->cart->get_checkout_url();
                 <div class="hr padding30 fixbottom10"></div>
 			</header>
 			
+			<div id="wholesale-titles" class="cf">
+				<h4 class="widget-title title-item">Item</h4>
+				<h4 class="widget-title title-quantity">Quantity</h4>
+				<h4 class="widget-title title-total">Total</h4>
+			</div>
 			<div id="wholesale-category-container">
-				
 				<?php
 				foreach($product_categories as $cat ) {
 					if(in_array($cat->slug, $wholesaleCategoriesEnabled)){
