@@ -1,0 +1,134 @@
+h2.tribe-events-page-title {
+	text-align:left;
+}
+
+#tribe-events-content .tribe-events-read-more{
+	background-color:#000000;
+	border-color:#000000;
+	display:inline-block;
+	color:#fff;
+	padding:7px 10px;
+}
+
+#tribe-events-content .tribe-events-read-more:hover,
+#tribe-bar-form .tribe-bar-submit input[type=submit]:hover {
+	background-color:#00b3db;
+	border-color:#00b3db;
+	color:#fff;
+}
+
+#tribe-bar-form #tribe-bar-views+.tribe-bar-filters {
+	height:76px;
+}
+
+
+/* CALENDAR */
+.tribe-events-calendar th,
+#tribe-events-content .tribe-events-tooltip h4 {
+	background-color:#000000;
+	color:#ffffff;
+}
+
+.tribe-events-calendar td.tribe-events-present div[id*="tribe-events-daynum-"], 
+.tribe-events-calendar td.tribe-events-present div[id*="tribe-events-daynum-"]>a {
+	background-color:#000000;
+}
+
+/* LIST */
+/* bold_title */
+.tribe-events-list-separator-month {
+	background:none;
+}
+.tribe-events-list-separator-month span {
+	margin-top:16px !important;
+}
+
+.tribe-events-list .vevent.hentry {
+	border-bottom:1px dotted #ccc;
+	padding-bottom:20px;
+}
+.tribe-events-loop .vevent.tribe-events-last {
+	border-bottom:none;
+}
+
+.tribe-events-list h2.tribe-events-list-event-title {
+	font-size:18px;
+	font-weight:500;
+}
+
+.tribe-events-loop .tribe-events-event-meta {
+	font-weight:normal;
+}
+
+.tribe-events-list .tribe-events-venue-details {
+	font-size:12px;
+}
+
+
+/* SINGLE EVENT */
+#tribe-events-pg-template .product_main_infos {
+	margin:0;
+}
+
+#tribe-events-pg-template .product_main_infos .summary h3 {
+	margin-top:5px;
+}
+
+#tribe-events-pg-template .event-info-bar {
+	border-top:1px solid #000000;
+	border-bottom:2px solid #000000;
+	padding-bottom:15px;
+}
+
+#tribe-events-pg-template .event-info-bar dt {
+	font-weight:800;
+	padding:2px 0;
+}
+
+#tribe-events-pg-template .event-info-bar .tribe-events-meta-group {
+	float:left;
+	
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+#tribe-events-pg-template .event-info-bar .tribe-events-meta-group-details {
+	width:20%;
+}
+
+#tribe-events-pg-template .event-info-bar .tribe-events-meta-group-venue {
+	width:50%;
+}
+
+#tribe-events-pg-template .event-info-bar .tribe-events-meta-group-organizer {
+	width:30%;
+}
+
+.single-tribe_events .event-map-bar .tribe-events-venue-map {
+	background:none;
+	border:none;
+	border-radius:0;
+	display:block;
+	float:none;
+	margin:0 0 50px 0;
+	padding:0;
+	width:100%;
+}
+table.tribe-events-tickets .tickets_price {
+	text-align:right;
+}
+table.tribe-events-tickets .tickets_price .price{
+	margin-bottom:0 !important;
+}
+
+
+/* ************************************************************** */
+/* Smaller screens < 580px */
+/* ************************************************************** */
+@media screen and (max-width: 580px) {
+	#tribe-events-pg-template .event-info-bar .tribe-events-meta-group {
+		float:none;
+		width:100%;
+	}
+}

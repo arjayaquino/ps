@@ -33,7 +33,7 @@ $woocommerce_loop['loop']++;
 
         <li class="wholesale-product cf">
 			<div class="product-image">
-				<a href="<?php the_permalink(); ?>"><?php echo get_the_post_thumbnail( $post->ID, 'small_product_image', 'shop_catalog') ?></a>
+				<a href="<?php the_permalink(); ?>"><?php echo get_the_post_thumbnail( $post->ID, 'thumbnail', 'shop_catalog') ?></a>
 			</div>
             <div class="product-info bbs">
                 <p><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></p>

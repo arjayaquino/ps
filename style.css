@@ -2860,7 +2860,8 @@ ul.cart_list .empty:before {
 h1.entry-title,
 h1.page-title,
 h1.entry-title a,
-h1.page-title a
+h1.page-title a,
+h2.tribe-events-page-title
 {
 	display:block;
 	font-size:30px;
@@ -5587,12 +5588,17 @@ table.shop_table tfoot .shipping td,
 	padding: 0 !important;
 	border-bottom: 0 !important;
 	margin: 0;
-	list-style: none outside;
+	list-style: none;
 }
 
 #payment ul.payment_methods li {
 	border-bottom:1px dotted #ccc !important;
+	list-style: none;
 	padding:15px 0 5px 0 !important;
+}
+
+#payment ul.payment_methods .payment_method_cod {
+	display:none;
 }
 
 .required   {
@@ -7195,7 +7201,8 @@ footer .sep {
 }
 
 /* bold_title */
-.bold_title {
+.bold_title,
+.tribe-events-list-separator-month {
 	display:block;
 	clear:both;
 	text-align:center;
@@ -7206,7 +7213,8 @@ footer .sep {
 	font-size:18px !important;
 }
 
-.bold_title span {
+.bold_title span,
+.tribe-events-list-separator-month span {
 	border:2px solid #000;
 	display:inline-block;
 	padding:10px 30px;
@@ -7869,7 +7877,8 @@ p.product a:hover {
 	color:#fff;
 }
 
-.dark_button {
+.dark_button,
+#tribe-bar-form .tribe-bar-submit input[type=submit] {
 	display:inline-block;
 	padding:15px 30px;
 	border-width:1px;

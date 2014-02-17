@@ -70,6 +70,11 @@
 	width: 114px;
 }
 
+.wholesale-category .wholesale-product .product-image img {
+	height:auto;
+	width:114px;
+}
+
 .wholesale-category .wholesale-product .product-info {
 	font-size: 13px;
 	padding-right:15px;
