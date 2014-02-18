@@ -40,7 +40,7 @@
 		//]]>
 		</script>
         
-        <div class="grid_9 menus_envelope">
+        <div class="grid_10 menus_envelope">
             <div class="menus_wrapper
                 <?php if (($theretailer_theme_options['shopping_bag_style']) && ($theretailer_theme_options['shopping_bag_style'] == "style2")) { ?>
                     menus_wrapper_shopping_bag_mobile_style

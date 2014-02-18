@@ -237,7 +237,7 @@ body#ps-store form .form-row textarea, body#ps-store  form .form-row select, bod
 
 body#ps-store .cbutton, body#ps-store .widget h4.widget-title, body#ps-store .widget input[type=submit], body#ps-store .widget.widget_shopping_cart .total, body#ps-store .widget.widget_shopping_cart .total strong, body#ps-store ul.product_list_widget span.amount, body#ps-store .gbtr_tools_info, body#ps-store .gbtr_tools_account, body#ps-store .gbtr_tools_search_inputbutton, body#ps-store .gbtr_little_shopping_bag .title, body#ps-store .product_item h3, body#ps-store .product_item .price, body#ps-store a.button, body#ps-store button.button, body#ps-store input.button, body#ps-store #respond input#submit, body#ps-store #content input.button, body#ps-store div.product .product_brand, body#ps-store div.product .summary span.price, body#ps-store div.product .summary p.price, body#ps-store #content div.product .summary span.price, body#ps-store #content div.product .summary p.price, body#ps-store .quantity input.qty, body#ps-store #content .quantity input.qty, body#ps-store div.product form.cart .variations .label, body#ps-store #content div.product form.cart .variations .label, body#ps-store .gbtr_product_share ul li a, body#ps-store div.product .woocommerce_tabs ul.tabs li a, body#ps-store #content div.product .woocommerce_tabs ul.tabs li a, body#ps-store div.product .woocommerce-tabs ul.tabs li a, body#ps-store #content div.product .woocommerce-tabs ul.tabs li a, body#ps-store table.shop_table th, body#ps-store table.shop_table .product-name .category, body#ps-store table.shop_table td.product-subtotal, body#ps-store .coupon .button-coupon, body#ps-store .cart_totals th, body#ps-store .cart_totals td, body#ps-store form .form-row label, body#ps-store table.shop_table td.product-quantity, body#ps-store table.shop_table td.product-name .product_brand, body#ps-store table.shop_table td.product-total, body#ps-store table.shop_table tfoot th, body#ps-store table.shop_table tfoot td, body#ps-store .gbtr_checkout_method_content .title, body#ps-store .gbtr_left_column_my_account ul.menu_my_account, body#ps-store table.my_account_orders td.order-total, body#ps-store .minicart_total_checkout, body#ps-store .addresses .title h3, body#ps-store .sf-menu a, body#ps-store .shortcode_featured_1 a, body#ps-store .shortcode_tabgroup ul.tabs li a, body#ps-store .shortcode_our_services a, body#ps-store span.onsale, body#ps-store .product h3, body#ps-store #respond label, body#ps-store form label, body#ps-store form input[type=submit], body#ps-store .section_title, body#ps-store .entry-content-aside-title, body#ps-store .gbtr_little_shopping_bag_wrapper_mobiles span, body#ps-store .grtr_product_header_mobiles .price, body#ps-store .gbtr_footer_widget_copyrights, body#ps-store .gbtr_footer_widget_copyrights_supplemental, body#ps-store .woocommerce_message, body#ps-store .woocommerce_error, body#ps-store .woocommerce_info, body#ps-store .woocommerce-message, body#ps-store .woocommerce-error, body#ps-store .woocommerce-info, body#ps-store p.product, body#ps-store .empty_bag_button, body#ps-store .from_the_blog_date, body#ps-store .gbtr_dark_footer_wrapper .widget_nav_menu ul li, body#ps-store .widget.the_retailer_recent_posts .post_date, body#ps-store .shortcode_banner_simple_bullet, body#ps-store .theretailer_product_sort, body#ps-store .light_button, body#ps-store .dark_button, body#ps-store .light_grey_button, body#ps-store .dark_grey_button, body#ps-store .custom_button, body#ps-store .style_1 .products_slider_category, body#ps-store .style_1 .products_slider_price, body#ps-store .page_archive_subtitle, body#ps-store .shortcode_banner_simple_inside h4, body#ps-store .mc_var_label, body#ps-store .theretailer_style_intro, body#ps-store .wpmega-link-title, body#ps-store #megaMenu h2.widgettitle, body#ps-store .group_table .price
 {
-	font-family: 'Gotham Narrow SSm A', 'Gotham Narrow SSm B', Arial, Helvetica, sans-serif !important;
+	font-family: 'Gotham SSm A', 'Gotham SSm B', Arial, Helvetica, sans-serif !important;
 }
 
 /*****************************************************************************************************/
@@ -419,7 +419,7 @@ ul.sf-menu li li li.sfHover ul {
 
 /*** arrows **/
 .sf-menu a.sf-with-ul {
-	padding-right: 	2.25em;
+	padding-right: 	2em;
 	min-width:		1px; /* trigger IE7 hasLayout so spans position accurately */
 }
 .sf-sub-indicator {
@@ -491,10 +491,6 @@ body {
 a {
 	color:#b39964;
 	text-decoration:none;
-}
-
-a:hover {
-	color:#000;
 }
 
 .clr {
@@ -913,7 +909,7 @@ form label {
 }
 
 form input[type=submit] {
-	padding:20px 50px;
+	padding:19px 30px;
 	font-size:12px;
 	color:#fff;
 	border:0;
@@ -922,6 +918,7 @@ form input[type=submit] {
 	font-weight:900;
 	text-transform:uppercase;
 	cursor:pointer;
+	line-height: 1em;
 }
 
 form input[type=submit]:hover {
@@ -2011,7 +2008,7 @@ ul.product_list_widget span.amount,
 	color: #fafafa;
 }
 
-.gbtr_main_menu_wrapper .grid_9.menus_envelope {
+.gbtr_main_menu_wrapper .menus_envelope {
 	float:right;
 }
 
@@ -3067,25 +3064,23 @@ span.onsale,
 
 .product_item h3 a {
 	font-size:12px;
-	font-family: 'Gotham A', 'Gotham B'; font-weight: 500; font-style: normal;
-	color:#b39964;
-	text-transform:uppercase;
+	font-family: 'Gotham A', 'Gotham B'; font-weight: 400; font-style: normal;
+	color:#000 !important;
 	padding:8px 0 0 0;
 	display:block;
 }
 
 .product_item p {
 	font-size:12px !important;
-	color:#000;
 	line-height:1.5em;
 	padding:0 !important;
 	margin:0 !important;
+	text-transform:uppercase;
 }
 
 .product_item p a {
-	color:#000;
 	display:inline-block;
-	font-family: 'Gotham A', 'Gotham B'; font-weight: 400; font-style: normal;
+	font-family: 'Gotham A', 'Gotham B'; font-weight: 500; font-style: normal;
 	padding:10px 0 5px 0;
 }
 
@@ -5721,6 +5716,18 @@ ul.order_details li strong {
 	margin:0;
 }
 
+.gbtr_my_account_wrapper .order-again {
+	padding:0;
+	text-align:right;
+}
+.gbtr_my_account_wrapper .order-again a {
+	display:none !important;
+}
+.gbtr_my_account_wrapper .order-again a.gbtr_order_again_but {
+	display:inline-block !important;
+	padding-bottom:20px;
+}
+
 .gbtr_no_recent_orders {
 	border-bottom:1px solid #ccc;
 	margin-bottom:30px;
@@ -6422,8 +6429,36 @@ article:first-child h1.page-title.gbtr_post_title_listing:first-child a
 	height:auto;
 }
 
-.gallery-item {
 
+.gallery {
+	margin:0 0 55px 0 !important;
+	padding:0 !important;
+}
+
+.gallery br {
+	height:0;
+	display:block;
+}
+
+.gallery dl,
+.gallery dt {
+	margin:0 !important;
+	padding:0 !important;
+}
+
+.gallery-item {
+	margin:0 !important;
+	padding:0 !important;
+	opacity: 1;
+    transition: opacity .3s ease-out;
+    -moz-transition: opacity .3s ease-out;
+    -webkit-transition: opacity .3s ease-out;
+    -o-transition: opacity .3s ease-out;
+	-webkit-transform: translateZ(0);
+}
+
+.gallery-item:hover {
+	opacity:.6;
 }
 
 .gallery-item img {
@@ -6431,7 +6466,7 @@ article:first-child h1.page-title.gbtr_post_title_listing:first-child a
 }
 
 .gallery-icon {
-	padding:0 20px 10px 0 !important;
+	padding:0 !important;
 }
 
 .gallery-icon img {
@@ -6503,7 +6538,7 @@ article:first-child h1.page-title.gbtr_post_title_listing:first-child a
 .entry-content p {
 	padding:0 0 20px 0;
 	font-size:13px;
-	line-height:1.7em;
+	line-height:1.4;
 	color:#555;
 }
 
@@ -6968,6 +7003,13 @@ footer .sep {
 	padding:0 30px 0 0;
 }
 
+.shortcode_text_block_bold p{
+	color:#000000;
+	font-size:32px;
+	font-weight:700;
+	padding-bottom:55px;
+}
+
 /* featured_1 */
 .shortcode_featured_1 {
 	text-align:center;
@@ -7211,6 +7253,7 @@ footer .sep {
 	border-bottom:2px solid #000;
 	height:30px;
 	font-size:18px !important;
+	font-weight:700 !important;
 }
 
 .bold_title span,
@@ -9047,7 +9090,7 @@ div.wpcf7-response-output {
 .gbtr_footer_wrapper {
 	/*background:#000;*/
 	color:#fff;
-	font-size:11px;
+	font-size:10px;
 }
 
 .bottom_wrapper {
@@ -9817,6 +9860,27 @@ list-style-type: none !important;
 .woocommerce-checkout h1.entry-title {
 	margin-bottom:50px;
 }
+
+/******************************************* /Login form ******************************************/
+#ps-loginform {
+	padding-top: 15px;
+}
+#ps-loginform p label {
+	display:block;
+	padding-bottom:0;
+}
+#ps-loginform p input[type=text],
+#ps-loginform p input[type=password] {
+	display:block;
+	width:100%;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+#ps-loginform #wp-submit{
+	width:100%;
+}
+
 
 /*****************************************************************************************************/
 /******************************************* /Common styles ******************************************/
