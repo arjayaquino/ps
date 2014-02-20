@@ -1085,6 +1085,55 @@ function shortcode_text_block_bold($params = array(), $content = null) {
 	return $text_block;
 }
 
+// [text_block_big_letter]
+function shortcode_text_block_big_letter($params = array(), $content = null) {
+	extract(shortcode_atts(array(
+		'indent' => '',
+	), $params));
+	$content = do_shortcode($content);
+	$class = 'shortcode_text_block_big_letter';
+	if($indent == "true"){
+		$class = 'shortcode_text_block_big_letter indent';
+	}
+	$text_block = '<p class="'.$class.'">'.$content.'</p>';
+	return $text_block;
+}
+
+// [text_block_with_left_image]
+function shortcode_text_block_with_left_image($params = array(), $content = null) {
+	extract(shortcode_atts(array(
+		'src' => '',
+		'title' => '',
+		'subtitle' => ''
+	), $params));
+	$text_block = '	
+		<div class="shortcode_text_block_with_left_image">
+			<span class="text-image"><img src="'.esc_attr($src).'" /></span>
+			<h1>'.esc_attr($title).'</h1>
+			<h5>'.$subtitle.'</h5>
+			<p>'.$content.'</p>
+		</div>
+	';
+	return $text_block;
+}
+
+// [text_block_with_list]
+function shortcode_text_block_with_list($params = array(), $content = null) {
+	extract(shortcode_atts(array(
+		'title' => ''
+	), $params));
+	$text_block = '	
+		<div class="shortcode_text_block_with_list">
+			<h4>'.esc_attr($title).'</h4>
+			<ul>'.$content.'</ul>
+		</div>
+	';
+	return $text_block;
+}
+
+
+
+
 add_shortcode('banner_full_width', 'banner_full_width');
 add_shortcode('wood_plank_triplet', 'wood_plank_triplet');
 add_shortcode("custom_images_slider", "shortcode_custom_images_slider");
@@ -1096,6 +1145,10 @@ add_shortcode("wholesale_category_listing", "shortcode_wholesale_category_listin
 add_shortcode("custom_featured_products_large", "shortcode_custom_featured_products_large");
 add_shortcode("from_the_blog_ps", "shortcode_from_the_blog_ps");
 add_shortcode("text_block_bold", "shortcode_text_block_bold");
+add_shortcode("text_block_big_letter", "shortcode_text_block_big_letter");
+add_shortcode("text_block_with_left_image", "shortcode_text_block_with_left_image");
+add_shortcode("text_block_with_list", "shortcode_text_block_with_list");
+
 
 /**********************************************/
 /************ Plugin recommendations **********/
