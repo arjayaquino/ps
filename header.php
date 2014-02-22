@@ -53,6 +53,7 @@ global $theretailer_theme_options;
 	<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/wholesaleorders.js"></script>
 <?php } ?>	
 
+<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/modernizr.js"></script>
 <script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/ps.js"></script>
 
 <?php

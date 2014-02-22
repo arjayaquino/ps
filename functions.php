@@ -12,6 +12,7 @@ global $theretailer_theme_options;
 $theretailer_theme_options = $smof_data;
 //include_once('inc/fonts_from_google.php'); // Load Fonts from Google
 
+add_filter('show_admin_bar', '__return_false');
 
 /*********************************************/
 /****************** STYLES *******************/
@@ -53,14 +54,41 @@ add_action('init','remove_default_actions');
 add_action( 'after_setup_theme', 'my_child_setup' );
 
 function my_child_setup() {
+	remove_shortcode( 'container' );
+	add_shortcode( 'container', 'shortcode_container_child' );
+	///
 	remove_shortcode( 'featured_1' );
 	add_shortcode( 'featured_1', 'shortcode_featured_1_child' );
 	///
-	remove_shortcode( 'featured_1' );
+	remove_shortcode( 'team_member' );
 	add_shortcode( 'team_member', 'team_member_child' );
 	///
 	remove_shortcode( 'custom_featured_products' );
 	add_shortcode( 'custom_featured_products', 'shortcode_custom_featured_products_child' );
+	///
+	remove_shortcode( 'empty_separator' );
+	add_shortcode( 'empty_separator', 'shortcode_empty_separator_child' );
+}
+
+// [container]
+function shortcode_container_child($params = array(), $content = null) {
+	
+	$content = do_shortcode($content);
+	$container = '<div id="full-width-wrapper"><div class="shortcode_container cf">'.$content.'</div></div>';
+	return $container;
+}
+
+
+// [empty_separator]
+function shortcode_empty_separator_child($params = array(), $content = null) {
+	extract(shortcode_atts(array(
+		'top_space' => '10px',
+		'bottom_space' => '30px'
+	), $params));
+	$empty_separator = '
+		<div class="empty_separator cf" style="padding-top:'.$top_space.';padding-bottom:'.$bottom_space.'"></div>
+	';
+	return $empty_separator;
 }
 
 // [featured_1]
