@@ -16,16 +16,18 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 
 get_header(); ?>
 
-<div id="tribe-events-pg-template" class="container_12">
-	
-    <div class="grid_12">
+<?php if(tribe_is_month() || tribe_is_list_view()){ putRevSlider( "workshops" ); }?>
 
-		<?php tribe_events_before_html(); ?>
-		<?php tribe_get_view(); ?>
-		<?php tribe_events_after_html(); ?>
-	</div>
+<div id="full-width-wrapper" class="fixed-padding">
+	<div id="tribe-events-pg-template" class="container_12">
+	    <div class="grid_12">
+			<?php if(tribe_is_month() || tribe_is_list_view()){ tribe_events_before_html(); }?>
+			<?php tribe_get_view(); ?>
+			<?php if(tribe_is_month() || tribe_is_list_view()){ tribe_events_after_html(); }?>
+		</div>
 	
-</div> <!-- #tribe-events-pg-template -->
+	</div> <!-- #tribe-events-pg-template -->
+</div>
 
 <?php get_template_part("light_footer"); ?>
 <?php get_template_part("dark_footer"); ?>

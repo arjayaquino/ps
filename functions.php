@@ -46,8 +46,6 @@ function remove_default_actions() {
 // Call 'remove_thematic_actions' (above) during WP initialization
 add_action('init','remove_default_actions');
 
-
-
 /**********************************************/
 /************ OVERRIDE SHORTCODES **********/
 /**********************************************/
@@ -68,6 +66,9 @@ function my_child_setup() {
 	///
 	remove_shortcode( 'empty_separator' );
 	add_shortcode( 'empty_separator', 'shortcode_empty_separator_child' );
+	///
+	remove_shortcode( 'banner_simple' );
+	add_shortcode( 'banner_simple', 'banner_simple_child' );
 }
 
 // [container]
@@ -77,7 +78,6 @@ function shortcode_container_child($params = array(), $content = null) {
 	$container = '<div id="full-width-wrapper"><div class="shortcode_container cf">'.$content.'</div></div>';
 	return $container;
 }
-
 
 // [empty_separator]
 function shortcode_empty_separator_child($params = array(), $content = null) {
@@ -89,6 +89,42 @@ function shortcode_empty_separator_child($params = array(), $content = null) {
 		<div class="empty_separator cf" style="padding-top:'.$top_space.';padding-bottom:'.$bottom_space.'"></div>
 	';
 	return $empty_separator;
+}
+
+// [banner_simple]
+function banner_simple_child($params = array(), $content = null) {
+	extract(shortcode_atts(array(
+		'title' => 'Title',
+		'subtitle' => '',
+		'link_url' => '',
+		'title_color' => '#fff',
+		'subtitle_color' => '#fff',
+		'border_color' => '#000',
+		'inner_stroke' => '2px',
+		'inner_stroke_color' => '#fff',
+		'bg_color' => '#000',
+		'bg_image' => '',
+		'h_padding' => '20px',
+		'v_padding' => '20px',
+		'sep_padding' => '5px',
+		'sep_color' => '#fff',
+		'with_bullet' => 'no',
+		'bullet_text' => '',
+		'bullet_bg_color' => '',
+		'bullet_text_color' => ''
+	), $params));
+	
+	$content = do_shortcode($content);
+	$banner_simple = '
+		<div class="shortcode_banner_simple" onclick="location.href=\''.$link_url.'\';" style="background-color:'.$border_color.'; background-image:url('.$bg_image.')">
+			<div class="shortcode_banner_simple_inside" style="padding:'.$v_padding.' '.$h_padding.'; background-color:'.$bg_color.'; border: '.$inner_stroke.' solid '.$inner_stroke_color.'">
+				<div><h3 style="color:'.$title_color.'">'.$title.'</h3></div>
+			</div>';
+	if ($with_bullet == 'yes') {
+		$banner_simple .= '<div class="shortcode_banner_simple_bullet" style="background:'.$bullet_bg_color.'; color:'.$bullet_text_color.'"><span>'.$bullet_text.'</span></div>';
+	}
+	$banner_simple .= '</div>';
+	return $banner_simple;
 }
 
 // [featured_1]
@@ -266,7 +302,6 @@ function shortcode_custom_featured_products_child($atts, $content = null) {
 	ob_end_clean();
 	return $content;
 }
-
 
 /**********************************************/
 /************ NEW SHORTCODES **********/
@@ -1161,6 +1196,63 @@ function shortcode_text_block_with_list($params = array(), $content = null) {
 
 
 
+// [approach_content_container]
+function shortcode_approach_content_container($params = array(), $content = null) {
+	
+	$content = do_shortcode($content);
+	$container = '<div><div class="shortcode_approach_content_container">'.$content.'</div></div>';
+	return $container;
+}
+
+// [three_col_container]
+function shortcode_three_col_container($params = array(), $content = null){
+	$content = do_shortcode($content);
+	$container = '<div class="shortcode_three_col_container cf">'.$content.'</div>';
+	return $container;
+}
+
+// [one_third_custom_with_image]
+function shortcode_one_third_custom_with_image($params = array(), $content = null){
+	extract(shortcode_atts(array(
+		'src' => '',
+		'title' => '',
+		'lastcol' => ''
+	), $params));
+	$lastClass = "";
+	if($lastcol == 'true') { $lastClass = "last-col"; };
+	$text_block = '	
+		<div class="shortcode_one_third_custom_with_image content_grid_4 '.$lastClass.'">
+			<span class="text-image"><img src="'.esc_attr($src).'" /></span>
+			<h2><span>'.esc_attr($title).'</span></h2>
+			<p>'.do_shortcode($content).'</p>
+		</div>
+	';
+	return $text_block;
+}
+
+
+
+// [full_custom_with_left_image]
+function shortcode_full_custom_with_left_image($params = array(), $content = null){
+	extract(shortcode_atts(array(
+		'src' => '',
+		'title' => ''
+	), $params));
+	$text_block = '	
+		<div class="shortcode_full_custom_with_left_image cf content_grid_12">
+			<div class="text-image"><img src="'.esc_attr($src).'" /></div>
+			<div class="text-box">
+				<h2><span>'.esc_attr($title).'</span></h2>
+				<p>'.do_shortcode($content).'</p>
+			</div>
+		</div>
+	';
+	return $text_block;
+}
+
+
+
+
 
 add_shortcode('banner_full_width', 'banner_full_width');
 add_shortcode('wood_plank_triplet', 'wood_plank_triplet');
@@ -1176,6 +1268,10 @@ add_shortcode("text_block_bold", "shortcode_text_block_bold");
 add_shortcode("text_block_big_letter", "shortcode_text_block_big_letter");
 add_shortcode("text_block_with_left_image", "shortcode_text_block_with_left_image");
 add_shortcode("text_block_with_list", "shortcode_text_block_with_list");
+add_shortcode("approach_content_container", "shortcode_approach_content_container");
+add_shortcode("three_col_container", "shortcode_three_col_container");
+add_shortcode("one_third_custom_with_image", "shortcode_one_third_custom_with_image");
+add_shortcode("full_custom_with_left_image", "shortcode_full_custom_with_left_image");
 
 
 /**********************************************/
@@ -1244,4 +1340,22 @@ if( isset( $available_methods['free_shipping'] ) AND isset( $available_methods['
 /**********************************************/
 function is_wholesale_template(){
 	return is_page_template('page-wholesale-orders.php');
+}
+
+
+
+
+function tribe_events_before_html_custom($content){
+	return do_shortcode($content);
+}
+
+add_filter('tribe_events_before_html', 'tribe_events_before_html_custom');
+
+add_filter('woocommerce_variable_price_html','custom_from',10);
+add_filter('woocommerce_grouped_price_html','custom_from',10);
+add_filter('woocommerce_variable_sale_price_html','custom_from',10);
+function custom_from($price){
+	$newText = substr($price, strrpos($price, "-"), strlen($price));
+	
+	return $newText;
 }

@@ -12,6 +12,8 @@ PS = {};
 		var $banner = $body.find(".custom_images_slider, .fullwidthbanner-container");
 		var $slider = $banner.find(".gbtr_items_slider");
 		var $content = $body.find("#full-width-wrapper");
+		var $gallery = $body.find(".gallery");
+		
 		
 		function init(){
 			
@@ -20,6 +22,10 @@ PS = {};
 			//don't enable paralax for mobile
 			if(!Modernizr.mq('(max-width: 479px)') && $banner.length > 0){
 				initParalax();
+			}
+			
+			if($gallery.length > 0){
+				initGalleryContentSwitcher();
 			}
 		} 
 		init();
@@ -34,6 +40,90 @@ PS = {};
 			});
 		}
 		
+		
+		
+		/**							GALLERY
+		 * ______________________________
+		 */
+		
+		function initGalleryContentSwitcher(){
+			
+			var galleryItemContentList = $body.find(".shortcode_approach_content_container").toArray();
+			var currentItemIndex = -1;
+			
+			//change the markup of the caption text a bit
+			$gallery.find(".wp-caption-text").each(function(){
+				var $caption = $(this);
+				var text = $caption.text();
+				$caption.html("<span>"+text+"</span>");
+			});
+			
+			//rollover for image slides
+			$gallery.find('.gallery-item').each(function(index){
+				var $galleryItem = $(this);
+				var $captionText = $galleryItem.find('.wp-caption-text');
+				
+				$galleryItem.on({
+					mouseenter: function(e){
+						if(!$captionText.hasClass("active")){
+							$captionText.stop().animate({opacity:1}, 300);
+						}
+					},
+					mouseleave: function(e){
+						if(!$captionText.hasClass("active")){
+							$captionText.stop().animate({opacity:0}, 300);
+						}
+					},
+					click: function(e){
+						e.preventDefault();
+						var $selectedItemContent = $(galleryItemContentList[index]);
+						var $currentContent = null;
+						if(currentItemIndex != index){
+							$body.find(".wp-caption-text.active").removeClass("active").animate({opacity:0}, 500);
+							$captionText.addClass("active");
+							//fade out current first
+							if(currentItemIndex != -1){
+								$currentContent = $(galleryItemContentList[currentItemIndex]);
+								$currentContent.fadeOut(250, function(){
+									displaySelectedGalleryItemContent($selectedItemContent);
+								});
+							} else {
+								displaySelectedGalleryItemContent($selectedItemContent);
+							}
+							
+							currentItemIndex = index;
+							
+						} else {
+							//do nothing already selected
+						}
+					}
+				});
+			});
+		}
+		
+		function displaySelectedGalleryItemContent($selectedItemContent){
+			//fade in element
+			if(isElementInView($selectedItemContent.parent())){
+				$selectedItemContent.fadeIn(300);
+			} 
+			//show and scroll
+			else {
+				$selectedItemContent.show();
+				$('html, body').animate({
+				       scrollTop: $selectedItemContent.offset().top
+			    }, 1000);
+			}
+		}
+		
+		function isElementInView($element){
+		    var docViewTop = $window.scrollTop();
+		    var docViewBottom = docViewTop + $window.height();
+
+		    var elemTop = $element.offset().top;
+		    var elemBottom = elemTop + $element.height();
+
+		    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+		}
 		
 		/**							PARALAX
 		 * ______________________________

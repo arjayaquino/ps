@@ -41,7 +41,7 @@
 					$loginUrlWithRedirect = add_query_arg( 'loginredirect', get_permalink(), $loginUrl );
 					?>
 					<?php if(is_user_logged_in()): ?>
-						<li id="menu-item-logout" class="menu-item"><a href="<?php echo wp_logout_url( get_permalink() ); ?>" title="Logout">Logout</a></li>
+						<li id="menu-item-logout" class="menu-item"><a href="<?php echo wp_logout_url( home_url() ); ?>" title="Logout">Logout</a></li>
 					<?php else: ?>
 						<li id="menu-item-login" class="menu-item"><a href="<?php echo $loginUrlWithRedirect; ?>" title="Login">Login</a></li>
 					<?php endif; ?>

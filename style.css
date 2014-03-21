@@ -3033,7 +3033,7 @@ span.onsale,
 .product_item .image_container {
 	position:relative;
 	width:190px;
-	max-height:243px;
+	max-height:190px;
 	overflow:hidden;
 }
 
@@ -6457,20 +6457,25 @@ article:first-child h1.page-title.gbtr_post_title_listing:first-child a
 }
 
 .gallery-item {
+	position:relative;
 	margin:0 !important;
 	padding:0 !important;
 	opacity: 1;
-    transition: opacity .3s ease-out;
+    /*transition: opacity .3s ease-out;
     -moz-transition: opacity .3s ease-out;
     -webkit-transition: opacity .3s ease-out;
     -o-transition: opacity .3s ease-out;
-	-webkit-transform: translateZ(0);
+	-webkit-transform: translateZ(0);*/
 }
-
+/*
 .gallery-item:hover {
 	opacity:.6;
 }
+*/
 
+.gallery-icon a {
+	display:block;
+}
 .gallery-item img {
 	border:0 !important;
 }
@@ -7071,6 +7076,81 @@ p.shortcode_text_block_big_letter {
 .shortcode_text_block_with_list {
 	margin:0 0 35px 30%;
 }
+
+.shortcode_three_col_container {
+	margin-bottom:55px;
+}
+.shortcode_three_col_container > br {
+	display:none;
+}
+.shortcode_three_col_container .last-col {
+	margin-right:0;
+}
+
+.shortcode_one_third_custom_with_image .text-image{
+	display:block;
+	margin-bottom:40px;
+	text-align:center;
+}
+
+.shortcode_one_third_custom_with_image .text-image img{
+	height:auto;
+	width:300px;
+}
+
+.shortcode_one_third_custom_with_image h2,
+.shortcode_full_custom_with_left_image h2 {
+	color:#0b9fbf !important;
+	font-size:19px;
+	font-weight:700;
+	height:40px;
+	margin-bottom:24px;
+	padding:0;
+	position:relative;
+	text-align:center;
+	text-transform:uppercase;
+}
+
+.shortcode_one_third_custom_with_image h2 span,
+.shortcode_full_custom_with_left_image h2 span {
+	bottom:0;
+	display: block;
+	position: absolute;
+	width:100%;
+}
+
+.shortcode_one_third_custom_with_image .light_button,
+.shortcode_full_custom_with_left_image .light_button{
+	margin:30px auto 0 auto;
+	display: block;
+	width: 115px;
+	text-align: center;
+}
+
+.shortcode_full_custom_with_left_image .text-image {
+	display:block;
+	float:left;
+	height:300px;
+	overflow:hidden;
+	padding-right:20px;
+	width:70%;
+	
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.shortcode_full_custom_with_left_image .text-image img {
+	height:auto;
+	width:100%;
+}
+
+.shortcode_full_custom_with_left_image .text-box {
+	float:left;
+	width:30%;
+}
+
+
 
 /* featured_1 */
 .shortcode_featured_1 {
@@ -8348,9 +8428,11 @@ p.product a:hover {
 }
 
 
-.products_slider_images.media_slider_image span.text-box{
+.products_slider_images.media_slider_image span.text-box,
+.gallery-item .wp-caption-text{
 	background:transparent url("images/bg-black-50.png") repeat left top;
 	color:#ffffff;
+	cursor:pointer;
 	display:block;
 	font-size:35px;
 	font-family: 'Gotham SSm A', 'Gotham SSm B'; font-weight: 800; font-style: normal;
@@ -8365,7 +8447,8 @@ p.product a:hover {
 	filter:alpha(opacity=0);
 }
 
-.products_slider_images.media_slider_image span.text-box span {
+.products_slider_images.media_slider_image span.text-box span,
+.gallery-item .wp-caption-text span {
 	bottom:0;
 	left:0;
 	position:absolute;
@@ -8375,6 +8458,10 @@ p.product a:hover {
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.gallery-item .wp-caption-text.active {
+	cursor:default;
 }
 
 .products_slider_images.media_slider_video{
@@ -9216,6 +9303,10 @@ div.wpcf7-response-output {
 }
 
 .shortcode_container > br{
+	display:none;
+}
+
+.shortcode_approach_content_container{
 	display:none;
 }
 
@@ -11248,6 +11339,15 @@ list-style-type: none !important;
 	
 	.shortcode_text_block_with_left_image .text-image img {
 		width:100%;
+	}
+	
+	.shortcode_full_custom_with_left_image .text-image,
+	.shortcode_full_custom_with_left_image .text-box {
+		padding-right:0;
+		width:100%;
+	}
+	.shortcode_full_custom_with_left_image .text-box {
+		margin-top:20px;
 	}
 }
 

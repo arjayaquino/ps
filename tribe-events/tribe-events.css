@@ -1,5 +1,20 @@
+.tribe-events-notices {
+	text-shadow: none;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+
 h2.tribe-events-page-title {
 	text-align:left;
+}
+
+.tribe-events-before-html h2, .tribe-events-after-html h2, #tribe-events-pg-template .tribe-events-content h2 {
+	line-height:1.3em;
+	padding:0 0 20px 0;
+	margin:-10px 0 60px 0;
+}
+#tribe-events-pg-template .tribe-events-content p, .tribe-events-before-html p, .tribe-events-after-html p {
+	line-height:1.4;
 }
 
 #tribe-events-content .tribe-events-read-more{
