@@ -35,6 +35,15 @@ add_action( 'wp_enqueue_scripts', 'theretailer_secondary_styles', 99 );
 /******************************************************/
 add_image_size('small_product_image', 150, 150, true);
 add_image_size('custom_best_sellers_large', 300, 300, true);
+add_image_size('shop_single', 510, 510, true);
+
+add_filter( 'image_size_names_choose', 'my_custom_sizes' );
+
+function my_custom_sizes( $sizes ) {
+    return array_merge( $sizes, array(
+        'sliding_banner_image' => __('Sliding Banner Image'),
+    ) );
+}
 
 
 /**********************************************/
@@ -598,9 +607,12 @@ function shortcode_media_slider_image( $atts, $content = null ) {
 			'src' => '',
 			'url' => ''
 		), $atts ) );
+		
+	$imgUrlRetina = str_replace(".jpg", "@2x.jpg 2x", $src);
+	
    return '<div class="products_slider_images media_slider_image">'.
 			'<a href="'.esc_attr($url).'">'.
-			'<span class="text-box"><span>'.$content.'</span></span><img src="'.esc_attr($src).'"/>'.
+			'<span class="text-box"><span>'.$content.'</span></span><img src="'.esc_attr($src).'" srcset="'.$imgUrlRetina.'"/>'.
 			'</a>'.
 			'</div>';
 }
@@ -671,7 +683,6 @@ function shortcode_custom_featured_by_category($atts, $content = null) {
 				var $infoOverlay = $productItem.find('.info-overlay');
 				var boxHeight = $productItem.find(".image_container").height();
 				var startY = boxHeight - $infoOverlay.outerHeight();
-				console.log($infoOverlay.data("startY"));
 				$infoOverlay.css("top", boxHeight + "px");
 				
 				$productItem.on({
@@ -1358,4 +1369,32 @@ function custom_from($price){
 	$newText = substr($price, strrpos($price, "-"), strlen($price));
 	
 	return $newText;
+}
+
+
+
+add_filter( 'get_terms', 'get_category_terms', 10, 3 );
+
+/**
+ * Hide the ticket category from the sidebar
+ */ 
+function get_category_terms( $terms, $taxonomies, $args ) {
+ 
+  $new_terms = array();
+ 
+  // if a product category and on the shop page
+  if ( in_array( 'product_cat', $taxonomies ) && is_shop() ) {
+ 
+    foreach ( $terms as $key => $term ) {
+ 
+      if ( ! in_array( $term->slug, array( 'ticket' ) ) ) {
+        $new_terms[] = $term;
+      }
+ 
+    }
+ 
+    $terms = $new_terms;
+  }
+ 
+  return $terms;
 }

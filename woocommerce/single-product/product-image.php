@@ -1,5 +1,11 @@
 <?php
-        
+/**
+* Product Image
+*
+* @author 	WooThemes
+* @package 	WooCommerce/Templates
+* @version  2.0.14
+*/
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $post, $woocommerce, $product;
@@ -127,8 +133,12 @@ if ( in_array( 'cloud-zoom-for-woocommerce/index.php', apply_filters( 'active_pl
                         ?>
                         
                         <div class="item">
-                            <span itemprop="image"><?php echo get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) ) ?></span>
-                            <a href="<?php echo $src[0] ?>" class="zoom" rel="prettyPhoto[product-gallery]"></a>
+                            <a href="<?php echo $src[0] ?>" 
+                            <?php if (get_option( 'woocommerce_enable_lightbox' ) == "yes") : ?>
+                            class="fresco" 
+                            <?php endif; ?>
+                            data-fresco-group="product-gallery"><span itemprop="image"><?php echo get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) ) ?></span>
+                            <span class="theretailer_zoom"></span></a>
                         </div>
                         
                         <?php endif; ?>	
@@ -159,8 +169,12 @@ if ( in_array( 'cloud-zoom-for-woocommerce/index.php', apply_filters( 'active_pl
                                     $image_class = esc_attr( implode( ' ', $classes ) );
                                     $image_title = esc_attr( get_the_title( $attachment_id ) );
                                     
-                                    printf( '<div class="item"><span>%s</span><a href="%s" class="zoom" rel="prettyPhoto[product-gallery]"></a></div>', wp_get_attachment_image( $attachment_id, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) ), wp_get_attachment_url( $attachment_id ) );
-                                    
+									if (get_option( 'woocommerce_enable_lightbox' ) == "yes") {
+										printf( '<div class="item"><a href="%s" class="fresco" data-fresco-group="product-gallery"><span>%s</span><span class="theretailer_zoom"></span></a></div>', wp_get_attachment_url( $attachment_id ), wp_get_attachment_image( $attachment_id, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) ) );
+									} else {
+										printf( '<div class="item"><a href="%s" data-fresco-group="product-gallery"><span>%s</span><span class="theretailer_zoom"></span></a></div>', wp_get_attachment_url( $attachment_id ), wp_get_attachment_image( $attachment_id, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) ) );
+									}
+
                                     $loop++;
                                 }
                                 

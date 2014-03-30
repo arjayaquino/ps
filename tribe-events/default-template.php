@@ -14,16 +14,20 @@
 
 if ( !defined('ABSPATH') ) { die('-1'); }
 
-get_header(); ?>
+get_header(); 
 
-<?php if(tribe_is_month() || tribe_is_list_view()){ putRevSlider( "workshops" ); }?>
+$isMainPage = (tribe_is_month() || tribe_is_list_view());
 
-<div id="full-width-wrapper" class="fixed-padding">
+?>
+
+<?php if($isMainPage){ putRevSlider( "workshops" ); }?>
+
+<div id="full-width-wrapper" class="<?php if($isMainPage){ echo 'fixed-padding'; } ?>">
 	<div id="tribe-events-pg-template" class="container_12">
 	    <div class="grid_12">
-			<?php if(tribe_is_month() || tribe_is_list_view()){ tribe_events_before_html(); }?>
+			<?php if($isMainPage){ tribe_events_before_html(); }?>
 			<?php tribe_get_view(); ?>
-			<?php if(tribe_is_month() || tribe_is_list_view()){ tribe_events_after_html(); }?>
+			<?php if($isMainPage){ tribe_events_after_html(); }?>
 		</div>
 	
 	</div> <!-- #tribe-events-pg-template -->

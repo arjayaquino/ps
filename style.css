@@ -2689,7 +2689,8 @@ ul.cart_list .empty:before {
 }
 
 .gbtr_product_slider .slider,
-.gbtr_items_slider .slider
+.gbtr_items_slider .slider,
+.tribe-related-events
 {
 	/* required */
 	width: 100%;
@@ -3068,6 +3069,7 @@ span.onsale,
 }
 
 .product_item h3 {
+	display:none;
 	margin:0 0 -8px 0 !important;
 	padding:0 !important;
 }
@@ -3933,7 +3935,8 @@ div.product div.product_meta .tagged_as,
 	-moz-box-shadow: 0 0px 0px 0 rgba(0,0,0,0) !important;
 }
 
-.doubleSlider-1 .zoom {
+.doubleSlider-1 .zoom,
+.theretailer_zoom {
 	width:40px;
 	height:40px;
 	
