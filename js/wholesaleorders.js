@@ -20,6 +20,7 @@
 			initCategorySelection();
 			initPlaceOrder();
 			initTotalPriceCalculation();
+			initAddVariations();
 		}
 		init();
 		
@@ -58,37 +59,37 @@
 				return;
 			}
 			
-			$wholesaleCatContainer.find(".quantity input[name='quantity']").each(function(index){
+			//changes in quantity
+			$wholesaleCatContainer.on("change", ".quantity input[name='quantity']", function(e){
 				var $quantityInput = $(this);
 				var $parent = $quantityInput.parents(".wholesale-product");
 				var $productTotal = $parent.find(".product-total");
+				var amount = getAmountForQuantityClick($quantityInput, $parent);
+				var total = getTotal(amount,$quantityInput.val());
 				
-				$quantityInput.on("change", function(e){
-					var amount = getAmountForQuantityClick($quantityInput, $parent);
-					var total = getTotal(amount,$quantityInput.val());
-					
-					showTotal($productTotal, total);
-				});
+				showTotal($productTotal, total);
 			});
 			
-			//variation select change
+			//variations
 			$wholesaleCatContainer.find(".variations_form").each(function(index){
-				var $variationsForm = $(this);
+				$(this).parents(".wholesale-product").addClass("has-variation");
+			});
+			
+			//listen to changes in variation
+			$wholesaleCatContainer.on("show_variation", ".single_variation_wrap", function(e){
+	        	var $singleVariationWrap = $(this);
+				var $variationsForm = $singleVariationWrap.parent();
 				var $parent = $variationsForm.parents(".wholesale-product");
 				var $productTotal = $parent.find(".product-total");
-		        var $singleVariationWrap = $variationsForm.find('.single_variation_wrap');
 				var productVariations = $variationsForm.data("product_variations");
+				var $quantityInput = $singleVariationWrap.find("input[name='quantity']");
+				var $select = $variationsForm.find(".variations select");
+				var amount = getAmountForVariationChange(productVariations, $select[0].selectedIndex);
 				
-				$singleVariationWrap.on("show_variation", function(e){
-					var $quantityInput = $singleVariationWrap.find("input[name='quantity']");
-					var $select = $variationsForm.find(".variations select");
-					var amount = getAmountForVariationChange(productVariations, $select[0].selectedIndex);
-					
-					if(amount != null){
-						var total = getTotal(amount, $quantityInput.val());
-						showTotal($productTotal, total);
-					}
-				});
+				if(amount != null){
+					var total = getTotal(amount, $quantityInput.val());
+					showTotal($productTotal, total);
+				}
 			});
 		}
 		
@@ -125,6 +126,16 @@
 		function getTotal(amount, quantity){
 			var total = parseFloat(amount * quantity);
 			return total.toFixed(2);
+		}
+		
+		
+		function initAddVariations(){
+			$wholesaleCatContainer.find(".add-variation").on("click", function(e){
+				e.preventDefault();
+				var $parent = $(this).parents(".wholesale-product");
+				var $clone = $parent.clone(true);
+				$parent.after($clone);
+			})
 		}
 		
 		

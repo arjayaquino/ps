@@ -16,7 +16,7 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 
 get_header(); 
 
-$isMainPage = (tribe_is_month() || tribe_is_list_view());
+$isMainPage = (tribe_is_month());
 
 ?>
 
@@ -24,7 +24,7 @@ $isMainPage = (tribe_is_month() || tribe_is_list_view());
 
 <div id="full-width-wrapper" class="<?php if($isMainPage){ echo 'fixed-padding'; } ?>">
 	<div id="tribe-events-pg-template" class="container_12">
-	    <div class="grid_12">
+	    <div class="grid_12" id="tribe-events">
 			<?php if($isMainPage){ tribe_events_before_html(); }?>
 			<?php tribe_get_view(); ?>
 			<?php if($isMainPage){ tribe_events_after_html(); }?>

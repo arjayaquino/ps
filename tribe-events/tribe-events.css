@@ -137,6 +137,18 @@ table.tribe-events-tickets .tickets_price .price{
 	margin-bottom:0 !important;
 }
 
+.tribe-events-month-event-title .wootickets-sold-out{
+	color:#000000;
+}
+
+.tribe-related-events-thumbnail {
+	display:none;
+}
+
+.tribe-events-in-series .recurringinfo {
+	display:none;
+}
+
 
 /* ************************************************************** */
 /* Smaller screens < 580px */

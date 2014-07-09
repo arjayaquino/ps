@@ -1,11 +1,12 @@
 <?php
 /**
-* Product Image
-*
-* @author 	WooThemes
-* @package 	WooCommerce/Templates
-* @version  2.0.14
-*/
+ * Single Product Image
+ *
+ * @author 		WooThemes
+ * @package 	WooCommerce/Templates
+ * @version     2.0.14
+ */
+        
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $post, $woocommerce, $product;
@@ -26,7 +27,7 @@ if ( in_array( 'cloud-zoom-for-woocommerce/index.php', apply_filters( 'active_pl
             <?php
                 if ( has_post_thumbnail() ) {
         
-                    $image       		= get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) );
+                    $image       		= get_the_post_thumbnail( $post->ID, 'shop_single' );
                     $image_title 		= esc_attr( get_the_title( get_post_thumbnail_id() ) );
                     $image_link  		= wp_get_attachment_url( get_post_thumbnail_id() );
                     $attachment_count   = count( $product->get_gallery_attachment_ids() );
@@ -52,12 +53,29 @@ if ( in_array( 'cloud-zoom-for-woocommerce/index.php', apply_filters( 'active_pl
 
 <?php } else { ?>
             
+            <?php
+            // get the width and height of shop_single thumb
+			
+			$tn_id = get_post_thumbnail_id( $post->ID );
+
+			$img = wp_get_attachment_image_src( $tn_id, 'shop_single' );
+			$width = $img[1];
+			$height = $img[2];
+			?>
+            
+            <style>
+			.doubleSlider-1 {
+				height: <?php echo $height; ?>px;
+			}
+			</style>
+            
             <div class="images gbtr_images">
                 
                 <script type="text/javascript">
                 
                     (function($){
                        $(window).load(function(){
+						   
                            $('.doubleSlider-1').iosSlider({
                                 scrollbar: true,
                                 snapToChildren: true,
@@ -104,7 +122,10 @@ if ( in_array( 'cloud-zoom-for-woocommerce/index.php', apply_filters( 'active_pl
 									$( ".doubleSlider-1" ).animate({
 										height: setHeight
 									}, 300, function() {
-											$('.gbtr_images').css({
+										$('.product_single_slider_previous').css({
+											visibility: "visible"
+										});
+										$('.product_single_slider_next').css({
 											visibility: "visible"
 										});
 									});
@@ -112,15 +133,21 @@ if ( in_array( 'cloud-zoom-for-woocommerce/index.php', apply_filters( 'active_pl
                                 },0);
                                 
                             }
+							
+							$('.variations select').change(function() {
+								$('.doubleSlider-1').iosSlider('goToSlide', 1);
+								$('.doubleSlider-2').iosSlider('goToSlide', 1);
+							});
+							
                        })
                     })(jQuery);
         
                 </script>
             
             
-                <div class = 'doubleSlider-1'>
+                <div class='doubleSlider-1'>
                 
-                    <div class = 'slider'>
+                    <div class='slider'>
                     
                         <?php if ( has_post_thumbnail() ) : ?>
                         
@@ -133,12 +160,12 @@ if ( in_array( 'cloud-zoom-for-woocommerce/index.php', apply_filters( 'active_pl
                         ?>
                         
                         <div class="item">
-                            <a href="<?php echo $src[0] ?>" 
-                            <?php if (get_option( 'woocommerce_enable_lightbox' ) == "yes") : ?>
-                            class="fresco" 
-                            <?php endif; ?>
-                            data-fresco-group="product-gallery"><span itemprop="image"><?php echo get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) ) ?></span>
-                            <span class="theretailer_zoom"></span></a>
+                            
+							<?php if (get_option( 'woocommerce_enable_lightbox' ) == "yes") { ?>
+								<a href="<?php echo $src[0] ?>" class="fresco"><span itemprop="image"><?php echo get_the_post_thumbnail( $post->ID, 'shop_single' ) ?></span><span class="theretailer_zoom"></span></a>
+							<?php } else { ?>
+								<span itemprop="image"><?php echo get_the_post_thumbnail( $post->ID, 'shop_single' ) ?></span>
+							<?php } ?>
                         </div>
                         
                         <?php endif; ?>	
@@ -168,13 +195,13 @@ if ( in_array( 'cloud-zoom-for-woocommerce/index.php', apply_filters( 'active_pl
                                     $image       = wp_get_attachment_image( $attachment_id, apply_filters( 'single_product_small_thumbnail_size', 'shop_thumbnail' ) );
                                     $image_class = esc_attr( implode( ' ', $classes ) );
                                     $image_title = esc_attr( get_the_title( $attachment_id ) );
-                                    
-									if (get_option( 'woocommerce_enable_lightbox' ) == "yes") {
-										printf( '<div class="item"><a href="%s" class="fresco" data-fresco-group="product-gallery"><span>%s</span><span class="theretailer_zoom"></span></a></div>', wp_get_attachment_url( $attachment_id ), wp_get_attachment_image( $attachment_id, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) ) );
-									} else {
-										printf( '<div class="item"><a href="%s" data-fresco-group="product-gallery"><span>%s</span><span class="theretailer_zoom"></span></a></div>', wp_get_attachment_url( $attachment_id ), wp_get_attachment_image( $attachment_id, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) ) );
-									}
 
+									if (get_option( 'woocommerce_enable_lightbox' ) == "yes") {
+										printf( '<div class="item"><a href="%s" class="fresco" data-fresco-group="product-gallery" data-fresco-options="fit: \'width\'"><span>%s</span><span class="theretailer_zoom"></span></a></div>', wp_get_attachment_url( $attachment_id ), wp_get_attachment_image( $attachment_id, 'shop_single' ) );
+									} else {
+										echo '<div class="item"><span>' .wp_get_attachment_image( $attachment_id, 'shop_single' ) .'</span></div>';
+									}
+									
                                     $loop++;
                                 }
                                 

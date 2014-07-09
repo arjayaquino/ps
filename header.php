@@ -3,7 +3,6 @@ global $woo_options;
 global $woocommerce;
 global $theretailer_theme_options;
 ?>
-
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" <?php language_attributes(); ?>> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" <?php language_attributes(); ?>> <![endif]-->
@@ -50,12 +49,8 @@ global $theretailer_theme_options;
 <?php if(is_wholesale_template()){ ?>
 <!-- *********************** wholesale ******************************** -->
 	<link rel="stylesheet" type="text/css" href="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/wholesale.css" />
-	<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/wholesaleorders.js"></script>
 <?php } ?>	
-
-<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/srcset.min.js"></script>
 <script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/modernizr.js"></script>
-<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/ps.js"></script>
 
 <?php
 $isWholesaleCustomer = current_user_can("order_wholesale");
@@ -71,6 +66,15 @@ if($isWholesaleCustomer && !$isShowPrice){
 }
 
 ?>
+
+<script type='text/javascript'>
+(function (d, t) {
+  var bh = d.createElement(t), s = d.getElementsByTagName(t)[0];
+  bh.type = 'text/javascript';
+  bh.src = '//www.bugherd.com/sidebarv2.js?apikey=unxbogji9y2x435q4xx1tq';
+  s.parentNode.insertBefore(bh, s);
+  })(document, 'script');
+</script>
 
 </head>
 

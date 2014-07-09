@@ -43,6 +43,7 @@ $woocommerce_loop['loop']++;
 			            echo $product->get_price_html();
 					}
 	            ?>
+				<a href="#" class="add-variation">Add a variation</a>
             </div>
         	
 			<div class="product-actions bbs">

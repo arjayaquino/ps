@@ -52,8 +52,9 @@ $event_id = get_the_ID();
 				    <?php the_title( '<h1 itemprop="name" class="product_title entry-title">', '</h1>' ); ?>
 			    </div>
 			
-				<h3><?php echo tribe_events_event_schedule_details(); ?></h3
-					>
+				<h3><?php echo tribe_events_event_schedule_details(); ?></h3>
+				<?php echo tribe_single_events_in_series(); ?>
+				
 				<div itemprop="description" class="entry-content gbtr_product_description">
 					<?php the_content(); ?>
 				</div>

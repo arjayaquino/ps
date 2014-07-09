@@ -123,6 +123,15 @@
 	float:right;
 }
 
+#wholesale-content .wholesale-product .add-variation {
+	display:none;
+}
+
+#wholesale-content .wholesale-product.has-variation .add-variation {
+	display:block;
+	margin-top:10px;
+}
+
 
 
 /* ************************************************************** */

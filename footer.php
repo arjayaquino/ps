@@ -38,5 +38,15 @@ jQuery(function($){
     <!-- ******************************************************************** -->
 	
 <?php wp_footer(); ?>
+
+
+<?php if(is_wholesale_template()){ ?>
+	<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/wholesaleorders.js"></script>
+<?php } ?>	
+
+<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/srcset.min.js"></script>
+<script src="<?php echo wp_make_link_relative(get_stylesheet_directory_uri()); ?>/js/ps.js"></script>
+
+
 </body>
 </html>

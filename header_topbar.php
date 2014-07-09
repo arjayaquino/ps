@@ -3,15 +3,7 @@
             <div class="gbtr_tools_search">
                 <form method="get" action="<?php echo home_url(); ?>">
                     <input class="gbtr_tools_search_inputtext" type="text" value="<?php echo esc_html($s, 1); ?>" name="s" id="s" />
-                    <input class="gbtr_tools_search_inputbutton" type="submit" value="Search" />
-                    <?php 
-                    /**
-                    * Check if WooCommerce is active
-                    **/
-                    if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-                    ?>
-                    <input type="hidden" name="post_type" value="product">
-                    <?php } ?>
+                    <button type="submit" class="gbtr_tools_search_inputbutton"><i class="fa fa-search"></i></button>
                 </form>
             </div>
             <div class="gbtr_tools_account">

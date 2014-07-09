@@ -9,7 +9,7 @@
 get_header(); ?>
 <div class="container_12">
 
-    <div class="grid_8">
+    <div class="grid_12">
 
 		<section id="primary" class="content-area">
 			<div id="content" class="site-content" role="main">
@@ -25,14 +25,32 @@ get_header(); ?>
 				<?php /* Start the Loop */ ?>
 				<?php while ( have_posts() ) : the_post(); ?>
 
-					<?php get_template_part( 'content', 'search' ); ?>
+					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                        <header class="entry-header">
+                            <h1 class="entry-title gbtr_post_title_listing"><a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'theretailer' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>      
+                        </header><!-- .entry-header -->
+                        
+   						<div class="search-thumbnail">
+				            <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
+				        </div>
+				
+                        <div class="search-excerpt">
+							<?php the_excerpt(); ?> <a href="<?php the_permalink(); ?>">Read More</a>
+						</div><!-- .entry-content -->
+						
+                    </article><!-- #post-<?php the_ID(); ?> -->
 
 				<?php endwhile; ?>
-
+				
+				<?php  
+					if (function_exists("emm_paginate")) {
+                        emm_paginate();
+                    }
+				?>
 				<?php theretailer_content_nav( 'nav-below' ); ?>
 
 			<?php else : ?>
-
+				
 				<?php get_template_part( 'no-results', 'search' ); ?>
 
 			<?php endif; ?>
@@ -41,16 +59,6 @@ get_header(); ?>
 		</section><!-- #primary .content-area -->
 
 	</div>
-    
-    <div class="grid_4">
-    
-		<div class="gbtr_aside_column">
-			<?php 
-			get_sidebar();
-			?>
-        </div>
-        
-    </div>
     
 </div>
 

@@ -33,9 +33,6 @@ add_action( 'wp_enqueue_scripts', 'theretailer_secondary_styles', 99 );
 /******************************************************/
 /**************** CUSTOM IMAGE SIZES ******************/
 /******************************************************/
-add_image_size('small_product_image', 150, 150, true);
-add_image_size('custom_best_sellers_large', 300, 300, true);
-add_image_size('shop_single', 510, 510, true);
 
 add_filter( 'image_size_names_choose', 'my_custom_sizes' );
 
@@ -46,14 +43,35 @@ function my_custom_sizes( $sizes ) {
 }
 
 
-/**********************************************/
-/************ OVERRIDE ACTIONS **********/
-/**********************************************/
-function remove_default_actions() {
+/**
+ * Define image sizes
+ */
+function child_theme_image_setup() {
+  	$catalog = array(
+		'width' 	=> '190',	// px
+		'height'	=> '190',	// px
+		'crop'		=> 1 		// true
+	);
 
+	$single = array(
+		'width' 	=> '510',	// px
+		'height'	=> '510',	// px
+		'crop'		=> 1 		// true
+	);
+
+	$thumbnail = array(
+		'width' 	=> '114',	// px
+		'height'	=> '114',	// px
+		'crop'		=> 1 		// false
+	);
+
+	// Image sizes
+	update_option( 'shop_catalog_image_size', $catalog ); 		// Product category thumbs
+	update_option( 'shop_single_image_size', $single ); 		// Single product image
+	update_option( 'shop_thumbnail_image_size', $thumbnail ); 	// Image gallery thumbs
 }
-// Call 'remove_thematic_actions' (above) during WP initialization
-add_action('init','remove_default_actions');
+add_action( 'after_setup_theme', 'child_theme_image_setup', 11 );
+
 
 /**********************************************/
 /************ OVERRIDE SHORTCODES **********/
@@ -201,31 +219,33 @@ function shortcode_custom_featured_products_child($atts, $content = null) {
 	(function($){
 		$(window).load(function(){
 			
-			/* items_slider */
-			$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
-				snapToChildren: true,
-				desktopClickDrag: true,
-				scrollbar: true,
-				scrollbarHide: true,
-				scrollbarLocation: 'bottom',
-				scrollbarHeight: '2px',
-				scrollbarBackground: '#ccc',
-				scrollbarBorder: '0',
-				scrollbarMargin: '0',
-				scrollbarOpacity: '1',
-				navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_right'),
-				navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_left'),
-				onSliderLoaded: custom_featured_products_UpdateSliderHeight,
-				//onSlideChange: custom_featured_products_UpdateSliderHeight,
-				//onSliderResize: custom_featured_products_UpdateSliderHeight
-			});
+			if(!Modernizr.mq('(max-width: 479px)')) {
+				/* items_slider */
+				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: true,
+					scrollbar: true,
+					scrollbarHide: true,
+					scrollbarLocation: 'bottom',
+					scrollbarHeight: '2px',
+					scrollbarBackground: '#ccc',
+					scrollbarBorder: '0',
+					scrollbarMargin: '0',
+					scrollbarOpacity: '1',
+					navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_right'),
+					navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_left'),
+					onSliderLoaded: custom_featured_products_UpdateSliderHeight,
+					//onSlideChange: custom_featured_products_UpdateSliderHeight,
+					//onSliderResize: custom_featured_products_UpdateSliderHeight
+				});
+			}
 			
 			function custom_featured_products_UpdateSliderHeight(args) {
-									
+								
 				//currentSlide = args.currentSlideNumber;
-				
+			
 				/* update height of the first slider */
-				
+			
 				var t = 0; // the height of the highest element (after the function runs)
 				var t_elem;  // the highest element (after the function runs)
 				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .product_item').each(function () {
@@ -235,7 +255,7 @@ function shortcode_custom_featured_products_child($atts, $content = null) {
 						t = $this.outerHeight();
 					}
 				});
-	
+
 				setTimeout(function() {
 					//var setHeight = $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider .product_item:eq(' + (args.currentSlideNumber-1) + ')').outerHeight(true);
 					//$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').animate({ height: setHeight+20 }, 300);
@@ -244,9 +264,8 @@ function shortcode_custom_featured_products_child($atts, $content = null) {
 						visibility: "visible"
 					});
 				},300);
-				
 			}
-		
+			
 		})
 	})(jQuery);
 	</script>
@@ -320,12 +339,12 @@ function banner_full_width($params = array(), $content = null) {
 	extract(shortcode_atts(array(
 		'title' => 'Title',
 		'subtitle' => 'Subtitle',
+		'id' => '',
 		'link_url' => '',
 		'title_color' => '#fff',
 		'subtitle_color' => '#fff',
 		'border_color' => '#000',
 		'bg_color' => '#000',
-		'bg_image' => '',
 		'h_padding' => '20px',
 		'v_padding' => '20px',
 		'sep_padding' => '5px',
@@ -335,10 +354,11 @@ function banner_full_width($params = array(), $content = null) {
 	), $params));
 	
 	$content = do_shortcode($content);
+	$imageFolder = "/wp-content/themes/ps-retailer/images/";
 	$banner_full_width = '
-		<div class="shortcode_banner_full_width" onclick="location.href=\''.$link_url.'\';" style="background-color:'.$border_color.'; background:url('.$bg_image.') repeat-x 50% 100%;">
+		<div id="'.$id.'" class="shortcode_banner_full_width" onclick="location.href=\''.$link_url.'\';" style="background-color:'.$border_color.';">
 			<div class="content_grid_12 shortcode_banner_full_width_inside">
-				<div class="shortcode_banner_full_width_package"><img src="/wp-content/themes/ps-retailer/images/shipping_banner_package.png" /></div>
+				<div class="shortcode_banner_full_width_package"><img src="'.$imageFolder.'shipping_banner_package.png" srcset="'.$imageFolder.'shipping_banner_package@2x.png 2x"/></div>
 				<div class="shortcode_banner_full_width_text" style="padding:'.$v_padding.' '.$h_padding.'; background-color:'.$bg_color.';">
 					<h3 style="color:'.$title_color.'">'.$title.'</h3>
 					<h4 style="color:'.$subtitle_color.'">'.$subtitle.'</h4>
@@ -385,31 +405,37 @@ function shortcode_custom_images_slider($atts, $content=null, $code) {
 	(function($){
 	   $(window).load(function(){
 			
-			/* items_slider */
-			$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
-				snapToChildren: true,
-				desktopClickDrag: true,
-				scrollbar: true,
-				scrollbarHide: true,
-				scrollbarLocation: 'bottom',
-				scrollbarHeight: '2px',
-				scrollbarBackground: '#ccc',
-				scrollbarBorder: '0',
-				scrollbarMargin: '0',
-				scrollbarOpacity: '1',
-				autoSlide: true,
-				autoSlideTimer: 4000,
-				autoSlideHoverPause: true,
-				infiniteSlider:true,
-				navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_next'),
-				navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_previous'),
-				onSliderLoaded: update_height_products_slider,
-				onSlideChange: update_height_products_slider,
-				onSliderResize: update_height_products_slider
-			});
+			if(!Modernizr.mq('(max-width: 479px)')) {
+				
+				/* items_slider */
+				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: true,
+					scrollbar: true,
+					scrollbarHide: true,
+					scrollbarLocation: 'bottom',
+					scrollbarHeight: '2px',
+					scrollbarBackground: '#ccc',
+					scrollbarBorder: '0',
+					scrollbarMargin: '0',
+					scrollbarOpacity: '1',
+					autoSlide: true,
+					autoSlideTimer: 4000,
+					autoSlideHoverPause: true,
+					infiniteSlider:true,
+					navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_next'),
+					navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_previous'),
+					onSliderLoaded: update_height_products_slider,
+					onSlideChange: update_height_products_slider,
+					onSliderResize: update_height_products_slider
+				});
+				
+				// need to update the slider to get the image widths working correctly
+				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider('update');
+			}
 			
 			function update_height_products_slider(args) {
-				
+			
 				/* update height of the first slider */
 
 				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_item').unbind('mouseenter mouseleave');
@@ -419,13 +445,10 @@ function shortcode_custom_images_slider($atts, $content=null, $code) {
 					$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider').css({ visibility: "visible" });
 					$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider').stop().animate({ height: setHeight+20 }, 300);
 				},0);
-				
-			}
-
-			// need to update the slider to get the image widths working correctly
-			$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider('update');
 			
-	   })
+			}
+			
+	   });
 	})(jQuery);
 
 	</script>
@@ -443,11 +466,12 @@ function shortcode_custom_images_slider($atts, $content=null, $code) {
 					else {
 						$output = '';
 						for($i = 0; $i < count($matches[0]); $i++) {
-										
+							$imgUrl = str_replace("&#215;", "x", trim($matches[5][$i]));			
+							$imgUrlRetina = str_replace(".jpg", "@2x.jpg 2x", $imgUrl);
 							$output .= '<li class="products_slider_item custom_images_slider_item">
 											<div class="products_slider_content">
 												<div class="products_slider_images_wrapper">
-													<div class="products_slider_images"><img src="' . do_shortcode(trim($matches[5][$i])) .'"/></div>                                
+													<div class="products_slider_images"><img src="' . $imgUrl .'" srcset="'.$imgUrlRetina.'"/></div>                                
 												</div>
 											</div>
 										</li>';
@@ -487,42 +511,60 @@ function shortcode_media_slider($atts, $content=null, $code) {
 	<script>
 	(function($){
 	   $(window).load(function(){
-			var $slider = $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider');
-			/* items_slider */
-			$slider.iosSlider({
-				snapToChildren: true,
-				desktopClickDrag: true,
-				scrollbar: true,
-				scrollbarHide: true,
-				scrollbarLocation: 'bottom',
-				scrollbarHeight: '2px',
-				scrollbarBackground: '#ccc',
-				scrollbarBorder: '0',
-				scrollbarMargin: '0',
-				scrollbarOpacity: '1',
-				autoSlide: true,
-				autoSlideTimer: 4000,
-				autoSlideHoverPause: true,
-				infiniteSlider:true,
-				navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_next'),
-				navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_previous'),
-				onSliderLoaded: update_height_products_slider,
-				onSlideChange: update_height_products_slider,
-				onSliderResize: update_height_products_slider
-			});
 			
-			//rollover for image slides
-			$('.media_slider_image a').on({
-				mouseenter: function(e){
-					$(this).find('span').stop().animate({opacity:1}, 500);
-				},
-				mouseleave: function(e){
-					$(this).find('span').stop().animate({opacity:0}, 500);
-				}
-			});
-			
-			function update_height_products_slider(args) {
+			if(!Modernizr.mq('(max-width: 479px)')) {
 				
+				var $slider = $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider');
+				
+				/* items_slider */
+				$slider.iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: true,
+					scrollbar: true,
+					scrollbarHide: true,
+					scrollbarLocation: 'bottom',
+					scrollbarHeight: '2px',
+					scrollbarBackground: '#ccc',
+					scrollbarBorder: '0',
+					scrollbarMargin: '0',
+					scrollbarOpacity: '1',
+					autoSlide: true,
+					autoSlideTimer: 4000,
+					autoSlideHoverPause: true,
+					infiniteSlider:true,
+					navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_next'),
+					navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_previous'),
+					onSliderLoaded: update_height_products_slider,
+					onSlideChange: update_height_products_slider,
+					onSliderResize: update_height_products_slider
+				});
+			
+				//rollover for image slides
+				$('.media_slider_image a').on({
+					mouseenter: function(e){
+						$(this).find('span').stop().animate({opacity:1}, 500);
+					},
+					mouseleave: function(e){
+						$(this).find('span').stop().animate({opacity:0}, 500);
+					}
+				});
+				
+				$slider.iosSlider('update');
+			
+				//vimeo player listeners
+				$slider.find(".media_slider_video iframe").each(function(index){
+					var player = $f(this);
+					player.addEvent('ready', function() {
+					    player.addEvent('pause',  onPause);
+					    player.addEvent('finish',  onPause);
+					    player.addEvent('play', onPlay);
+					});
+				});
+			}
+			
+		
+			function update_height_products_slider(args) {
+
 				/* update height of the first slider */
 
 				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider_item').unbind('mouseenter mouseleave');
@@ -532,23 +574,10 @@ function shortcode_media_slider($atts, $content=null, $code) {
 					$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider').css({ visibility: "visible" });
 					$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .products_slider').stop().animate({ height: setHeight+20 }, 300);
 				},0);
-				
-			}
 
+			}
+			
 			// need to update the slider to get the image widths working correctly
-			$slider.iosSlider('update');
-			
-			
-			//vimeo player listeners
-			$slider.find(".media_slider_video iframe").each(function(index){
-				var player = $f(this);
-				player.addEvent('ready', function() {
-				    player.addEvent('pause',  onPause);
-				    player.addEvent('finish',  onPause);
-				    player.addEvent('play', onPlay);
-				});
-			});
-			
 			function onPause(id) {
 				$slider.iosSlider('autoSlidePlay');
 			}
@@ -652,55 +681,60 @@ function shortcode_custom_featured_by_category($atts, $content = null) {
     <script>
 	(function($){
 		$(window).load(function(){
-			var $slider = $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?>');
-			/* items_slider */
-			$slider.find('.gbtr_items_slider').iosSlider({
-				snapToChildren: true,
-				desktopClickDrag: true,
-				scrollbar: true,
-				scrollbarHide: true,
-				scrollbarLocation: 'bottom',
-				scrollbarHeight: '2px',
-				scrollbarBackground: '#ccc',
-				scrollbarBorder: '0',
-				scrollbarMargin: '0',
-				scrollbarOpacity: '1',
-				navNextSelector: $slider.find('.gbtr_items_sliders_nav .big_arrow_right'),
-				navPrevSelector: $slider.find('.gbtr_items_sliders_nav .big_arrow_left'),
-				onSliderLoaded: custom_featured_products_UpdateSliderHeight,
-				//onSlideChange: custom_featured_products_UpdateSliderHeight,
-				//onSliderResize: custom_featured_products_UpdateSliderHeight
-			});	
 			
-			if($slider.find('.product_item').length < 2){
-				$slider.find('.gbtr_items_sliders_nav .big_arrow_right').hide();
-				$slider.find('.gbtr_items_sliders_nav .big_arrow_left').hide();
+			if(!Modernizr.mq('(max-width: 479px)')) {
+				var $slider = $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?>');
+				
+				/* items_slider */
+				$slider.find('.gbtr_items_slider').iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: true,
+					scrollbar: true,
+					scrollbarHide: true,
+					scrollbarLocation: 'bottom',
+					scrollbarHeight: '2px',
+					scrollbarBackground: '#ccc',
+					scrollbarBorder: '0',
+					scrollbarMargin: '0',
+					scrollbarOpacity: '1',
+					navNextSelector: $slider.find('.gbtr_items_sliders_nav .big_arrow_right'),
+					navPrevSelector: $slider.find('.gbtr_items_sliders_nav .big_arrow_left'),
+					onSliderLoaded: custom_featured_products_UpdateSliderHeight,
+					//onSlideChange: custom_featured_products_UpdateSliderHeight,
+					//onSliderResize: custom_featured_products_UpdateSliderHeight
+				});	
+			
+				if($slider.find('.product_item').length < 2){
+					$slider.find('.gbtr_items_sliders_nav .big_arrow_right').hide();
+					$slider.find('.gbtr_items_sliders_nav .big_arrow_left').hide();
+				}
+			
+				//show the info overlay
+				$slider.find('.product_item').each(function(){
+					var $productItem = $(this);
+					var $infoOverlay = $productItem.find('.info-overlay');
+					var boxHeight = $productItem.find(".image_container").height();
+					var startY = boxHeight - $infoOverlay.outerHeight();
+					$infoOverlay.css("top", boxHeight + "px");
+				
+					$productItem.on({
+						mouseenter: function(e){
+							$infoOverlay.show().stop().animate({top:startY}, 250);
+						},
+						mouseleave: function(e){
+							$infoOverlay.stop().animate({top:boxHeight}, 250);
+						}
+					});
+				});
 			}
 			
-			//show the info overlay
-			$slider.find('.product_item').each(function(){
-				var $productItem = $(this);
-				var $infoOverlay = $productItem.find('.info-overlay');
-				var boxHeight = $productItem.find(".image_container").height();
-				var startY = boxHeight - $infoOverlay.outerHeight();
-				$infoOverlay.css("top", boxHeight + "px");
-				
-				$productItem.on({
-					mouseenter: function(e){
-						$infoOverlay.show().stop().animate({top:startY}, 250);
-					},
-					mouseleave: function(e){
-						$infoOverlay.stop().animate({top:boxHeight}, 250);
-					}
-				});
-			});
-			
+		
 			function custom_featured_products_UpdateSliderHeight(args) {
-									
+								
 				//currentSlide = args.currentSlideNumber;
-				
+			
 				/* update height of the first slider */
-				
+			
 				var t = 0; // the height of the highest element (after the function runs)
 				var t_elem;  // the highest element (after the function runs)
 				$slider.find('.product_item').each(function () {
@@ -710,7 +744,7 @@ function shortcode_custom_featured_by_category($atts, $content = null) {
 						t = $this.outerHeight();
 					}
 				});
-	
+
 				setTimeout(function() {
 					//var setHeight = $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider .product_item:eq(' + (args.currentSlideNumber-1) + ')').outerHeight(true);
 					//$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').animate({ height: setHeight+20 }, 300);
@@ -719,9 +753,7 @@ function shortcode_custom_featured_by_category($atts, $content = null) {
 						visibility: "visible"
 					});
 				},300);
-				
 			}
-		
 		});
 	})(jQuery);
 	</script>
@@ -818,32 +850,36 @@ function shortcode_custom_featured_products_large($atts, $content = null) {
     <script>
 	(function($){
 		$(window).load(function(){
-		
-			/* items_slider */
-			$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
-				snapToChildren: true,
-				desktopClickDrag: true,
-				scrollbar: true,
-				scrollbarHide: true,
-				scrollbarLocation: 'bottom',
-				scrollbarHeight: '2px',
-				scrollbarBackground: '#ccc',
-				scrollbarBorder: '0',
-				scrollbarMargin: '0',
-				scrollbarOpacity: '1',
-				navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_right'),
-				navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_left'),
-				onSliderLoaded: custom_best_sellers_UpdateSliderHeight,
-				//onSlideChange: custom_best_sellers_UpdateSliderHeight,
-				//onSliderResize: custom_best_sellers_UpdateSliderHeight
-			});
 			
+			if(!Modernizr.mq('(max-width: 479px)')) {
+				/* items_slider */
+				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: true,
+					scrollbar: true,
+					scrollbarHide: true,
+					scrollbarLocation: 'bottom',
+					scrollbarHeight: '2px',
+					scrollbarBackground: '#ccc',
+					scrollbarBorder: '0',
+					scrollbarMargin: '0',
+					scrollbarOpacity: '1',
+					navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_right'),
+					navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_left'),
+					onSliderLoaded: custom_best_sellers_UpdateSliderHeight,
+					//onSlideChange: custom_best_sellers_UpdateSliderHeight,
+					//onSliderResize: custom_best_sellers_UpdateSliderHeight
+				});
+			}
+			
+			
+		
 			function custom_best_sellers_UpdateSliderHeight(args) {
-									
+								
 				//currentSlide = args.currentSlideNumber;
-				
+			
 				/* update height of the first slider */
-				
+			
 				var t = 0; // the height of the highest element (after the function runs)
 				var t_elem;  // the highest element (after the function runs)
 				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .product_item').each(function () {
@@ -853,7 +889,7 @@ function shortcode_custom_featured_products_large($atts, $content = null) {
 						t = $this.outerHeight();
 					}
 				});
-	
+
 				setTimeout(function() {
 					//var setHeight = $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider .product_item:eq(' + (args.currentSlideNumber-1) + ')').outerHeight(true);
 					//$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').animate({ height: setHeight+20 }, 300);
@@ -862,7 +898,6 @@ function shortcode_custom_featured_products_large($atts, $content = null) {
 						visibility: "visible"
 					});
 				},300);
-				
 			}
 			
 		})
@@ -1003,27 +1038,31 @@ function shortcode_from_the_blog_ps($atts, $content = null) {
     <script>
 	(function($){
 		$(window).load(function(){
-			/* items_slider */
-			$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
-				snapToChildren: true,
-				desktopClickDrag: true,
-				scrollbar: true,
-				scrollbarHide: true,
-				scrollbarLocation: 'bottom',
-				scrollbarHeight: '2px',
-				scrollbarBackground: '#ccc',
-				scrollbarBorder: '0',
-				scrollbarMargin: '0',
-				scrollbarOpacity: '1',
-				navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_right'),
-				navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_left'),
-				onSliderLoaded: gbtr_items_slider_UpdateSliderHeight,
-			});
-		
+			
+			if(!Modernizr.mq('(max-width: 479px)')) {
+				/* items_slider */
+				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_slider').iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: true,
+					scrollbar: true,
+					scrollbarHide: true,
+					scrollbarLocation: 'bottom',
+					scrollbarHeight: '2px',
+					scrollbarBackground: '#ccc',
+					scrollbarBorder: '0',
+					scrollbarMargin: '0',
+					scrollbarOpacity: '1',
+					navNextSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_right'),
+					navPrevSelector: $('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .gbtr_items_sliders_nav .big_arrow_left'),
+					onSliderLoaded: gbtr_items_slider_UpdateSliderHeight,
+				});
+			}
+			
+	
 			function gbtr_items_slider_UpdateSliderHeight(args) {
-			
+		
 				/* update height of the first slider */
-			
+		
 				var t = 0; // the height of the highest element (after the function runs)
 				var t_elem;  // the highest element (after the function runs)
 				$('.gbtr_items_slider_id_<?php echo $sliderrandomid ?> .from_the_blog_item').each(function () {
@@ -1040,8 +1079,8 @@ function shortcode_from_the_blog_ps($atts, $content = null) {
 						visibility: "visible"
 					});
 				});
-			
 			}
+			
 		});
 	})(jQuery);
 	</script>
@@ -1383,7 +1422,7 @@ function get_category_terms( $terms, $taxonomies, $args ) {
   $new_terms = array();
  
   // if a product category and on the shop page
-  if ( in_array( 'product_cat', $taxonomies ) && is_shop() ) {
+  if ( in_array( 'product_cat', $taxonomies ) ) {
  
     foreach ( $terms as $key => $term ) {
  
@@ -1397,4 +1436,118 @@ function get_category_terms( $terms, $taxonomies, $args ) {
   }
  
   return $terms;
+}
+
+
+// Modify the default WooCommerce orderby dropdown
+//
+// Options: menu_order, popularity, rating, date, price, price-desc
+// In this example I'm removing price & price-desc but you can remove any of the options
+function my_woocommerce_catalog_orderby( $orderby ) {
+	unset($orderby["menu_order"]);
+	return $orderby;
+}
+add_filter( "woocommerce_catalog_orderby", "my_woocommerce_catalog_orderby", 20 );
+
+
+
+
+
+/**********************************************/
+/************ EVENTS HELPERS **********/
+/**********************************************/
+
+function tribe_has_wootickets($post_id = null) {
+	global $wpdb;
+	$id = TribeEvents::postIdHelper($post_id);
+
+	$result = $wpdb->get_var($wpdb->prepare(
+		"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = %s AND meta_value = %d LIMIT 1",
+		'_tribe_wooticket_for_event', $id
+	));
+
+	return (is_numeric($result) and $result > 0);
+}
+
+/**
+ * Returns an array of all WooTicket products associated with the event.
+ *
+ * @param null $post_id
+ * @return array
+ */
+function get_wooticket_products($post_id = null) {
+	global $wpdb;
+	$id = TribeEvents::postIdHelper($post_id);
+	$products = array();
+
+	$product_ids = $wpdb->get_col($wpdb->prepare(
+		"SELECT post_id FROM $wpdb->postmeta WHERE meta_key = %s AND meta_value = %d",
+		'_tribe_wooticket_for_event', $id
+	));
+
+	if ($product_ids) foreach ($product_ids as $id)
+		$products[] = new WC_Product_Simple($id);
+
+	return $products;
+}
+
+/**
+ * This solution adds a piece of text reading "Sold out!" just after the event title
+ * in list view.
+ *
+ * @uses tribe_has_wootickets() 
+ * @see http://pastebin.com/hPS9nwft
+ *
+ * @uses get_wooticket_products()
+ * @see http://pastebin.com/csuqeikG
+ */
+function wootickets_list_view_sold_out() {
+	global $post;
+
+	if (TribeEvents::POSTTYPE !== $post->post_type) return;
+	if (!tribe_has_wootickets($post->ID)) return;
+
+	$tickets = get_wooticket_products($post->ID);
+	$stock = 0;
+
+	foreach ($tickets as $ticket)
+		$stock += $ticket->get_stock_quantity();
+
+	if (0 === $stock) echo '<span class="wootickets-sold-out"> - Sold out! </span>';
+}
+
+// Hook up so it fires during the event list loop
+add_action('tribe_events_after_the_event_title', 'wootickets_list_view_sold_out');
+
+
+
+
+/**
+ * Echos the single recurring event page's other events in the series.
+ *
+ * @param mixed $tag The specific tags you want it relating to.
+ * @param mixed $category The specific categories you want it relating to.
+ * @param int $count The number of related events to find.
+ * @return void.
+ */
+function tribe_single_events_in_series( $count = 10 ) {
+	global $currentPost;
+	$posts = tribe_get_related_posts( $count );
+	if ( is_array( $posts ) && !empty( $posts ) ) {
+		echo '<ul class="tribe-related-events tribe-events-in-series tribe-clearfix hfeed vcalendar">';
+		foreach ( $posts as $post ) {
+			//if(tribe_is_recurring_event($post->ID) && get_the_title( $currentPost->ID ) == get_the_title( $post->ID )){
+			if(get_the_title( $currentPost->ID ) == get_the_title( $post->ID )){
+				echo '<li>';
+					echo '<div class="tribe-related-event-info">';
+						//echo '<h3 class="tribe-related-events-title summary"><a href="'. tribe_get_event_link( $post ) .'" class="url" rel="bookmark">'. get_the_title( $post->ID ) .'</a></h3>';
+						if ( $post->post_type == TribeEvents::POSTTYPE ) {
+							echo tribe_events_event_schedule_details( $post , '<a href="'.tribe_get_event_link( $post->ID ).'">', '</a>'); //make the event date/time clickable
+						}
+					echo '</div>';
+				echo '</li>';
+			}
+		}
+		echo '</ul>';
+	}
 }

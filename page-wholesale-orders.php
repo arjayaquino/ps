@@ -18,11 +18,11 @@ get_header('shop');
 
 $wholesaleCategoriesEnabled = explode(',', preg_replace('/\s+/', '', get_post_meta($post->ID, 'wholesale_orders_categories', true)));
 $args = array(
-    'number'     => $number,
-    'orderby'    => $orderby,
-    'order'      => $order,
-    'hide_empty' => $hide_empty,
-    'include'    => $ids
+    'number'     => '',
+    'orderby'    => 'name',
+    'order'      => 'ASC',
+    'hide_empty' => 'true',
+    'include'    => array()
 );
 
 $product_categories = get_terms('product_cat', $args );

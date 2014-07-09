@@ -13,7 +13,7 @@ PS = {};
 		var $slider = $banner.find(".gbtr_items_slider");
 		var $content = $body.find("#full-width-wrapper");
 		var $gallery = $body.find(".gallery");
-		
+		var $productCategorySidebar = $body.find("ul.product-categories");
 		
 		function init(){
 			
@@ -24,8 +24,13 @@ PS = {};
 				initParalax();
 			}
 			
-			if($gallery.length > 0){
+			if($gallery.length > 0 && !$body.hasClass("single")){
 				initGalleryContentSwitcher();
+			}
+			
+			if($productCategorySidebar.length > 0){
+				$productCategorySidebar.find(".cat-parent .cat-parent > a")
+				.attr("href", "javascript:void(0);");
 			}
 		} 
 		init();
